@@ -963,6 +963,8 @@ function openLightbox(i) {
   const name = items[i]?.name;
   if (!name) return;
 
+  lbImg.src = "";   // ←これ追加
+
   lbImg.src = fullUrl(name);
   preloadNeighbors(i);
 
