@@ -416,7 +416,7 @@ function build() {
     img.dataset.src = fileUrl(entry);
     img.decoding = "async";
 
-    const FIRST_EAGER = 16;
+    const FIRST_EAGER = 6;
     if (i < FIRST_EAGER) {
       img.loading = "eager";
       img.fetchPriority = "high";
