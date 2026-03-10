@@ -8,7 +8,8 @@
 ===================================================== */
 
 const IMAGES_JSON_PATH = "./images.json";
-const IMAGES_DIR = "images/";
+const THUMBS_DIR = "images/thumb/";
+const FULL_DIR = "images/full/";
 const MANUAL_IMAGES = [];
 
 const masonryEl = document.getElementById("masonry");
@@ -127,9 +128,14 @@ function gapY() {
   return cssPx("--gap-y", 110);
 }
 
-function fileUrl(entry) {
+function thumbUrl(entry) {
   const file = typeof entry === "string" ? entry : entry.file;
-  return IMAGES_DIR + file;
+  return THUMBS_DIR + file;
+}
+
+function fullUrl(entry) {
+  const file = typeof entry === "string" ? entry : entry.file;
+  return FULL_DIR + file;
 }
 
 function entryAspect(entry) {
@@ -413,10 +419,10 @@ function build() {
     const btn = document.createElement("button");
     const img = document.createElement("img");
 
-    img.dataset.src = fileUrl(entry);
+    img.dataset.src = thumbUrl(entry);
     img.decoding = "async";
 
-    const FIRST_EAGER = 16;
+    const FIRST_EAGER = 10;
     if (i < FIRST_EAGER) {
       img.loading = "eager";
       img.fetchPriority = "high";
@@ -517,7 +523,7 @@ function lazy() {
         startLoad(img);
       }
     },
-    { rootMargin: "6000px" }
+    { rootMargin: "2200px" }
   );
 
   items.forEach((it) => lazyIO.observe(it.img));
@@ -675,8 +681,8 @@ function preloadNeighbors(index) {
   const prevName = items[prev]?.name;
   const nextName = items[next]?.name;
 
-  if (prevName) preloadImage(fileUrl(prevName));
-  if (nextName) preloadImage(fileUrl(nextName));
+  if (prevName) preloadImage(fullUrl(prevName));
+  if (nextName) preloadImage(fullUrl(nextName));
 }
 
 /* =========================
@@ -957,7 +963,7 @@ function openLightbox(i) {
   const name = items[i]?.name;
   if (!name) return;
 
-  lbImg.src = fileUrl(name);
+  lbImg.src = fullUrl(name);
   preloadNeighbors(i);
 
   lightboxEl.classList.add("is-open");
@@ -1021,18 +1027,18 @@ function setupSmoothScroll() {
 
   lazy();
 
-  const kick = () => warmAllImages(6);
+  const kick = () => warmAllImages(4);
   const kickAfterLayout = () => {
     requestAnimationFrame(() => {
       if ("requestIdleCallback" in window) {
-        requestIdleCallback(kick, { timeout: 1200 });
+        requestIdleCallback(kick, { timeout: 1600 });
       } else {
-        setTimeout(kick, 400);
+        setTimeout(kick, 700);
       }
     });
   };
 
-  kickAfterLayout();
+ kickAfterLayout();
 
   setupSmoothScroll();
   animateCursor();
