@@ -941,7 +941,6 @@ function disableLightboxMagnifier() {
 
 lbImg.addEventListener("load", () => {
   if (!lightboxEl.classList.contains("is-open")) return;
-  enableLightboxMagnifier();
 });
 
 function closeLightbox() {
@@ -963,22 +962,35 @@ function openLightbox(i) {
   const name = items[i]?.name;
   if (!name) return;
 
-  lbImg.style.opacity = 0;
-
-  const img = new Image();
-  img.src = fullUrl(name);
-
-  img.onload = () => {
-    lbImg.src = img.src;
-    lbImg.style.opacity = 1;
-  };
-
-  preloadNeighbors(i);
+  const nextSrc = fullUrl(name);
 
   lightboxEl.classList.add("is-open");
   document.documentElement.style.overflow = "hidden";
 
-  enableLightboxMagnifier();
+  // 前の画像を完全に消す
+  lbImg.style.opacity = "0";
+  lbImg.removeAttribute("src");
+  lbImg.src = "";
+  lbImg.alt = "";
+
+  // 拡大カーソル側も一旦消す
+  cursorEl.style.backgroundImage = "none";
+
+  const preload = new Image();
+  preload.decoding = "async";
+  preload.src = nextSrc;
+
+  preload.onload = () => {
+    // 読み込み完了後に初めて差し込む
+    lbImg.src = nextSrc;
+
+    requestAnimationFrame(() => {
+      lbImg.style.opacity = "1";
+      enableLightboxMagnifier();
+    });
+  };
+
+  preloadNeighbors(i);
 
   requestAnimationFrame(() => {
     syncUILens();
