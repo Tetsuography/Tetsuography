@@ -1,10 +1,10 @@
 /* =====================================================
-   Tetsuography — CLEAN FINAL
+   Tetsuography — CLEAN SIMPLE FINAL
    - centered masonry
-   - fast loading
+   - simpler / faster loading
    - per-image fade-in
    - hover / cursor / lightbox kept
-   - 2連続優先、必要時のみ3連まで
+   - thumb for grid / full for lightbox
 ===================================================== */
 
 const IMAGES_JSON_PATH = "./images.json";
@@ -172,8 +172,6 @@ async function loadImages() {
 
 /* =========================
    Initial ordering
-   - 2連続優先
-   - 必要時のみ3連まで
 ========================= */
 function initialMixOnce() {
   if (initialMixed) return;
@@ -286,117 +284,6 @@ function initialMixOnce() {
     heights[best] += h + gy;
   }
 
-  function triplesCount(arr) {
-    let run = 1;
-    let triples = 0;
-    for (let i = 1; i < arr.length; i++) {
-      run = entryType(arr[i]) === entryType(arr[i - 1]) ? run + 1 : 1;
-      if (run === 3) triples++;
-    }
-    return triples;
-  }
-
-  function breakGlobalRuns(arr, maxRun = 3) {
-    let run = 1;
-
-    for (let i = 1; i < arr.length; i++) {
-      const tPrev = entryType(arr[i - 1]);
-      const tCur = entryType(arr[i]);
-
-      run = tPrev === tCur ? run + 1 : 1;
-
-      if (run > maxRun) {
-        const want = tCur === "P" ? "L" : "P";
-
-        let j = -1;
-        for (let d = 1; d <= 60; d++) {
-          const r = i + d;
-          const l = i - d;
-          if (r < arr.length && entryType(arr[r]) === want) {
-            j = r;
-            break;
-          }
-          if (l >= 0 && entryType(arr[l]) === want) {
-            j = l;
-            break;
-          }
-        }
-
-        if (j !== -1) {
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-          i = Math.max(1, i - 2);
-          run = 1;
-        } else {
-          run = maxRun;
-        }
-      }
-    }
-  }
-
-  function softenTriples(arr) {
-    const n = arr.length;
-
-    const scoreAround = (k) => {
-      let s = 0;
-      for (let i = Math.max(1, k - 4); i <= Math.min(n - 1, k + 4); i++) {
-        if (entryType(arr[i]) === entryType(arr[i - 1])) s++;
-      }
-      return s;
-    };
-
-    for (let i = 2; i < n; i++) {
-      const a = entryType(arr[i - 2]);
-      const b = entryType(arr[i - 1]);
-      const c = entryType(arr[i]);
-      if (!(a === b && b === c)) continue;
-
-      const want = c === "P" ? "L" : "P";
-      const targets = [i, i - 1];
-      const maxD = 40;
-
-      let bestSwap = null;
-
-      for (const t of targets) {
-        if (t < 0 || t >= n) continue;
-
-        for (let d = 1; d <= maxD; d++) {
-          const cand = [t + d, t - d];
-          for (const j of cand) {
-            if (j < 0 || j >= n) continue;
-            if (entryType(arr[j]) !== want) continue;
-
-            const before = scoreAround(t) + scoreAround(j);
-            [arr[t], arr[j]] = [arr[j], arr[t]];
-            const after = scoreAround(t) + scoreAround(j);
-            [arr[t], arr[j]] = [arr[j], arr[t]];
-
-            if (after < before) {
-              bestSwap = { t, j };
-              d = maxD + 1;
-              break;
-            }
-          }
-        }
-        if (bestSwap) break;
-      }
-
-      if (bestSwap) {
-        const { t, j } = bestSwap;
-        [arr[t], arr[j]] = [arr[j], arr[t]];
-        i = Math.max(2, i - 3);
-      }
-    }
-  }
-
-  breakGlobalRuns(ordered, 3);
-
-  for (let k = 0; k < 10; k++) {
-    const before = triplesCount(ordered);
-    softenTriples(ordered);
-    const after = triplesCount(ordered);
-    if (after >= before) break;
-  }
-
   IMAGES = ordered;
 }
 
@@ -422,7 +309,7 @@ function build() {
     img.dataset.src = thumbUrl(entry);
     img.decoding = "async";
 
-    const FIRST_EAGER = 10;
+    const FIRST_EAGER = 6;
     if (i < FIRST_EAGER) {
       img.loading = "eager";
       img.fetchPriority = "high";
@@ -449,7 +336,7 @@ function build() {
 }
 
 /* =========================
-   Lazy / warm load / fade in
+   Lazy / fade in
 ========================= */
 let lazyIO = null;
 
@@ -498,19 +385,15 @@ function startLoad(img) {
   img.onerror = () => {
     if (finished) return;
     finished = true;
-
     it.loaded = false;
     it.wrap.classList.add("is-error");
     console.warn("Image failed to load:", img.dataset.src);
-
     revealItem(it);
   };
 
   img.src = img.dataset.src;
 
-  if (img.complete) {
-    done();
-  }
+  if (img.complete) done();
 }
 
 function lazy() {
@@ -523,46 +406,10 @@ function lazy() {
         startLoad(img);
       }
     },
-    { rootMargin: "2200px" }
+    { rootMargin: "1000px" }
   );
 
   items.forEach((it) => lazyIO.observe(it.img));
-}
-
-function makeLoadQueueByVisualOrder() {
-  return items
-    .slice()
-    .sort((a, b) => {
-      const ay = parseFloat(a.wrap.style.top) || 0;
-      const by = parseFloat(b.wrap.style.top) || 0;
-      if (ay !== by) return ay - by;
-
-      const ax = parseFloat(a.wrap.style.left) || 0;
-      const bx = parseFloat(b.wrap.style.left) || 0;
-      return ax - bx;
-    })
-    .map((it) => it.img)
-    .filter((img) => img.dataset.started !== "1");
-}
-
-function warmAllImages(concurrency = 6) {
-  const queue = makeLoadQueueByVisualOrder();
-  let active = 0;
-
-  const runNext = () => {
-    while (active < concurrency && queue.length) {
-      const img = queue.shift();
-      active++;
-      startLoad(img);
-
-      setTimeout(() => {
-        active = Math.max(0, active - 1);
-        runNext();
-      }, 60);
-    }
-  };
-
-  runNext();
 }
 
 /* =========================
@@ -580,8 +427,6 @@ function scheduleLayout() {
 
 /* =========================
    Masonry layout
-   - 2連続優先
-   - 必要時のみ3連まで
 ========================= */
 function layout() {
   masonryEl.classList.add("is-relayouting");
@@ -756,7 +601,6 @@ function animateCursor() {
     return;
   }
 
-  // ===== Lightbox mode =====
   if (lightboxOpen) {
     activeHoverImg = lbImg;
     document.body.classList.add("cursor-active", "cursor-hover");
@@ -806,8 +650,8 @@ function animateCursor() {
     document.body.classList.remove("ui-lens-on");
     setUIHideTarget(null);
 
-    if (overImg) {
-      if (lbImg.src) cursorEl.style.backgroundImage = `url(${lbImg.src})`;
+    if (overImg && lbImg.src) {
+      cursorEl.style.backgroundImage = `url(${lbImg.src})`;
     } else {
       cursorEl.style.backgroundImage = "none";
     }
@@ -831,7 +675,6 @@ function animateCursor() {
     return;
   }
 
-  // ===== Masonry mode =====
   document.body.classList.remove("ui-lens-on");
 
   const x = mouseX - rect.left;
@@ -929,7 +772,9 @@ function bind() {
 ========================= */
 function enableLightboxMagnifier() {
   activeHoverImg = lbImg;
-  cursorEl.style.backgroundImage = `url(${lbImg.src})`;
+  if (lbImg.src) {
+    cursorEl.style.backgroundImage = `url(${lbImg.src})`;
+  }
   document.body.classList.add("cursor-active", "cursor-hover");
 }
 
@@ -951,6 +796,7 @@ function closeLightbox() {
   document.body.classList.remove("ui-lens-on");
   disableLightboxMagnifier();
   document.body.classList.remove("cursor-active");
+  lbImg.removeAttribute("src");
 }
 
 lbClose.onclick = closeLightbox;
@@ -963,15 +809,19 @@ function openLightbox(i) {
   const name = items[i]?.name;
   if (!name) return;
 
-  lbImg.src = "";   // ←これ追加
-
-  lbImg.src = fullUrl(name);
-  preloadNeighbors(i);
+  const nextSrc = fullUrl(name);
 
   lightboxEl.classList.add("is-open");
+  lightboxEl.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden";
 
-  enableLightboxMagnifier();
+  disableLightboxMagnifier();
+
+  lbImg.removeAttribute("src");
+  lbImg.src = nextSrc;
+  lbImg.alt = "";
+
+  preloadNeighbors(i);
 
   requestAnimationFrame(() => {
     syncUILens();
@@ -1028,19 +878,6 @@ function setupSmoothScroll() {
   scheduleLayout();
 
   lazy();
-
-  const kick = () => warmAllImages(4);
-  const kickAfterLayout = () => {
-    requestAnimationFrame(() => {
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(kick, { timeout: 1600 });
-      } else {
-        setTimeout(kick, 700);
-      }
-    });
-  };
-
- kickAfterLayout();
 
   setupSmoothScroll();
   animateCursor();
