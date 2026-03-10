@@ -422,7 +422,7 @@ function build() {
     img.dataset.src = thumbUrl(entry);
     img.decoding = "async";
 
-    const FIRST_EAGER = 6;
+    const FIRST_EAGER = 10;
     if (i < FIRST_EAGER) {
       img.loading = "eager";
       img.fetchPriority = "high";
@@ -523,7 +523,7 @@ function lazy() {
         startLoad(img);
       }
     },
-    { rootMargin: "1200px" }
+    { rootMargin: "2200px" }
   );
 
   items.forEach((it) => lazyIO.observe(it.img));
@@ -1027,13 +1027,13 @@ function setupSmoothScroll() {
 
   lazy();
 
-  const kick = () => warmAllImages(2);
+  const kick = () => warmAllImages(4);
   const kickAfterLayout = () => {
     requestAnimationFrame(() => {
       if ("requestIdleCallback" in window) {
-        requestIdleCallback(kick, { timeout: 2500 });
+        requestIdleCallback(kick, { timeout: 1600 });
       } else {
-        setTimeout(kick, 1200);
+        setTimeout(kick, 700);
       }
     });
   };
