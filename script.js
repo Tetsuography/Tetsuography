@@ -963,9 +963,16 @@ function openLightbox(i) {
   const name = items[i]?.name;
   if (!name) return;
 
-  lbImg.src = "";   // ←これ追加
+  lbImg.style.opacity = 0;
 
-  lbImg.src = fullUrl(name);
+  const img = new Image();
+  img.src = fullUrl(name);
+
+  img.onload = () => {
+    lbImg.src = img.src;
+    lbImg.style.opacity = 1;
+  };
+
   preloadNeighbors(i);
 
   lightboxEl.classList.add("is-open");
