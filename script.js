@@ -517,7 +517,7 @@ function lazy() {
         startLoad(img);
       }
     },
-    { rootMargin: "6000px" }
+    { rootMargin: "1200px" }
   );
 
   items.forEach((it) => lazyIO.observe(it.img));
@@ -1021,13 +1021,13 @@ function setupSmoothScroll() {
 
   lazy();
 
-  const kick = () => warmAllImages(6);
+  const kick = () => warmAllImages(2);
   const kickAfterLayout = () => {
     requestAnimationFrame(() => {
       if ("requestIdleCallback" in window) {
-        requestIdleCallback(kick, { timeout: 1200 });
+        requestIdleCallback(kick, { timeout: 2500 });
       } else {
-        setTimeout(kick, 400);
+        setTimeout(kick, 1200);
       }
     });
   };
