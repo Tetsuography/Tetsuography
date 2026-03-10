@@ -1038,7 +1038,7 @@ function setupSmoothScroll() {
     });
   };
 
- 
+ kickAfterLayout();
 
   setupSmoothScroll();
   animateCursor();
