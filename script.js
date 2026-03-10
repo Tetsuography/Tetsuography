@@ -967,11 +967,10 @@ function openLightbox(i) {
   lightboxEl.classList.add("is-open");
   document.documentElement.style.overflow = "hidden";
 
-  // 前の画像を完全に消す
-  lbImg.style.opacity = "0";
+　lbImg.style.opacity = "0";
+  lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
   lbImg.src = "";
-  lbImg.alt = "";
 
   // 拡大カーソル側も一旦消す
   cursorEl.style.backgroundImage = "none";
