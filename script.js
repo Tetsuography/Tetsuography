@@ -769,6 +769,13 @@ function bind() {
       syncUILens();
     }
   });
+
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("is-open");
+      mobileMenuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  }
 }
 
 /* =========================
