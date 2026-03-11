@@ -54,27 +54,43 @@ content="images/001.jpg">
 <meta property="og:description"
 content="Photography portfolio by Tetsu.">
 
+<link rel="preconnect" href="https://tetsuography.com">
+<link rel="dns-prefetch" href="https://tetsuography.com">
 
 </head>
-
-  <link rel="preconnect" href="https://tetsuography.com">
-　<link rel="dns-prefetch" href="https://tetsuography.com">
 
 <body>
   <!-- Fixed header (Squarespaceっぽい) -->
   <header class="site-header" role="banner">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Home">Tetsuography</a>
+  <div class="header-inner">
+    <a class="brand" href="index.html" aria-label="Home">Tetsuography</a>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="about.html">about</a>
-        <!-- Instagram icon -->
-       <a class="nav-link nav-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
-  instagram
-</a>
-      </nav>
-    </div>
-  </header>
+    <button
+      class="mobile-menu-toggle"
+      id="mobileMenuToggle"
+      aria-label="Menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-link" href="about.html">about</a>
+      <a class="nav-link nav-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+        instagram
+      </a>
+    </nav>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="about.html">about</a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
+  </div>
+</header>
 
   <main class="page" role="main">
     <!-- Masonry container -->
