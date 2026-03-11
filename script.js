@@ -786,6 +786,7 @@ function disableLightboxMagnifier() {
 
 lbImg.addEventListener("load", () => {
   if (!lightboxEl.classList.contains("is-open")) return;
+  lbImg.style.visibility = "visible";
   enableLightboxMagnifier();
 });
 
@@ -796,6 +797,7 @@ function closeLightbox() {
   document.body.classList.remove("ui-lens-on");
   disableLightboxMagnifier();
   document.body.classList.remove("cursor-active");
+  lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
 }
 
@@ -817,6 +819,7 @@ function openLightbox(i) {
 
   disableLightboxMagnifier();
 
+  lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
   lbImg.src = nextSrc;
   lbImg.alt = "";
