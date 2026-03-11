@@ -576,7 +576,7 @@ function setUIHideTarget(el) {
   });
 }
 
-const CURSOR_LERP = 0.16;
+const CURSOR_LERP = 0.26;
 
 function animateCursor() {
   cursorX += (mouseX - cursorX) * CURSOR_LERP;
@@ -797,7 +797,6 @@ function closeLightbox() {
   document.body.classList.remove("ui-lens-on");
   disableLightboxMagnifier();
   document.body.classList.remove("cursor-active");
-
   lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
   lbImg.src = "";
@@ -815,27 +814,29 @@ function openLightbox(i) {
 
   const nextSrc = fullUrl(name);
 
-  lightboxEl.classList.add("is-open");
-  lightboxEl.setAttribute("aria-hidden", "false");
-  document.documentElement.style.overflow = "hidden";
-
   disableLightboxMagnifier();
 
-  lbImg.style.visibility = "hidden";
-  lbImg.removeAttribute("src");
-  lbImg.src = "";
-  lbImg.alt = "";
+  const img = new Image();
+  img.decoding = "async";
+  img.src = nextSrc;
 
-  requestAnimationFrame(() => {
+  img.onload = () => {
+    lightboxEl.classList.add("is-open");
+    lightboxEl.setAttribute("aria-hidden", "false");
+    document.documentElement.style.overflow = "hidden";
+
+    lbImg.style.visibility = "visible";
     lbImg.src = nextSrc;
-  });
+    lbImg.alt = "";
 
-  preloadNeighbors(i);
+    enableLightboxMagnifier();
+    preloadNeighbors(i);
 
-  requestAnimationFrame(() => {
-    syncUILens();
-    requestAnimationFrame(syncUILens);
-  });
+    requestAnimationFrame(() => {
+      syncUILens();
+      requestAnimationFrame(syncUILens);
+    });
+  };
 }
 
 /* =========================
