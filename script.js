@@ -14,6 +14,9 @@ const MANUAL_IMAGES = [];
 
 const masonryEl = document.getElementById("masonry");
 
+const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
 // CSS var()/clamp() を px に解決するための計測用div
 const __probe = document.createElement("div");
 __probe.style.cssText =
@@ -108,6 +111,7 @@ function clamp(n, a, b) {
 }
 
 function getColumnsAuto(W) {
+  if (W <= 720) return 2;
   if (W >= 1180) return 6;
   if (W >= 960) return 5;
   if (W >= 720) return 4;
