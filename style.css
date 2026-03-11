@@ -307,23 +307,16 @@ body.cursor-hover .custom-cursor {
   cursor:none !important;
 }
 
-
-/* ✅ make image bigger */
 .lightbox-stage img{
   max-width: min(96vw, 1400px);
   max-height: 88vh;
   width:auto;
   height:auto;
+  display:block;
 
-  transform:scale(0.98);
-  opacity:0;
-  transition:transform 260ms var(--ease-ui),
-             opacity 260ms var(--ease-ui);
-}
-
-.lightbox.is-open .lightbox-stage img{
-  transform:scale(1);
-  opacity:1;
+  transform: none;
+  opacity: 1;
+  transition: none;
 }
 
 /* ✅ make buttons always clickable */
