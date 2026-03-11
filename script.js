@@ -576,7 +576,7 @@ function setUIHideTarget(el) {
   });
 }
 
-const CURSOR_LERP = 0.26;
+const CURSOR_LERP = 0.3;
 
 function animateCursor() {
   cursorX += (mouseX - cursorX) * CURSOR_LERP;
