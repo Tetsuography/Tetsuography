@@ -797,8 +797,10 @@ function closeLightbox() {
   document.body.classList.remove("ui-lens-on");
   disableLightboxMagnifier();
   document.body.classList.remove("cursor-active");
+
   lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
+  lbImg.src = "";
 }
 
 lbClose.onclick = closeLightbox;
@@ -821,8 +823,12 @@ function openLightbox(i) {
 
   lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
-  lbImg.src = nextSrc;
+  lbImg.src = "";
   lbImg.alt = "";
+
+  requestAnimationFrame(() => {
+    lbImg.src = nextSrc;
+  });
 
   preloadNeighbors(i);
 
