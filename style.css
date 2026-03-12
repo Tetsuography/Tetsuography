@@ -313,12 +313,11 @@ body.cursor-hover .custom-cursor {
 }
 
 .lightbox-stage img{
-  width: min(96vw, 1400px);
-  height: 88vh;
   max-width: min(96vw, 1400px);
   max-height: 88vh;
-  object-fit: contain;
-  display: block;
+  width:auto;
+  height:auto;
+  display:block;
 
   transform: none;
   opacity: 1;
