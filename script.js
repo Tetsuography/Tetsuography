@@ -288,6 +288,117 @@ function initialMixOnce() {
     heights[best] += h + gy;
   }
 
+  function triplesCount(arr) {
+    let run = 1;
+    let triples = 0;
+    for (let i = 1; i < arr.length; i++) {
+      run = entryType(arr[i]) === entryType(arr[i - 1]) ? run + 1 : 1;
+      if (run === 3) triples++;
+    }
+    return triples;
+  }
+
+  function breakGlobalRuns(arr, maxRun = 3) {
+    let run = 1;
+
+    for (let i = 1; i < arr.length; i++) {
+      const tPrev = entryType(arr[i - 1]);
+      const tCur = entryType(arr[i]);
+
+      run = tPrev === tCur ? run + 1 : 1;
+
+      if (run > maxRun) {
+        const want = tCur === "P" ? "L" : "P";
+
+        let j = -1;
+        for (let d = 1; d <= 60; d++) {
+          const r = i + d;
+          const l = i - d;
+          if (r < arr.length && entryType(arr[r]) === want) {
+            j = r;
+            break;
+          }
+          if (l >= 0 && entryType(arr[l]) === want) {
+            j = l;
+            break;
+          }
+        }
+
+        if (j !== -1) {
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+          i = Math.max(1, i - 2);
+          run = 1;
+        } else {
+          run = maxRun;
+        }
+      }
+    }
+  }
+
+  function softenTriples(arr) {
+    const n = arr.length;
+
+    const scoreAround = (k) => {
+      let s = 0;
+      for (let i = Math.max(1, k - 4); i <= Math.min(n - 1, k + 4); i++) {
+        if (entryType(arr[i]) === entryType(arr[i - 1])) s++;
+      }
+      return s;
+    };
+
+    for (let i = 2; i < n; i++) {
+      const a = entryType(arr[i - 2]);
+      const b = entryType(arr[i - 1]);
+      const c = entryType(arr[i]);
+      if (!(a === b && b === c)) continue;
+
+      const want = c === "P" ? "L" : "P";
+      const targets = [i, i - 1];
+      const maxD = 40;
+
+      let bestSwap = null;
+
+      for (const t of targets) {
+        if (t < 0 || t >= n) continue;
+
+        for (let d = 1; d <= maxD; d++) {
+          const cand = [t + d, t - d];
+          for (const j of cand) {
+            if (j < 0 || j >= n) continue;
+            if (entryType(arr[j]) !== want) continue;
+
+            const before = scoreAround(t) + scoreAround(j);
+            [arr[t], arr[j]] = [arr[j], arr[t]];
+            const after = scoreAround(t) + scoreAround(j);
+            [arr[t], arr[j]] = [arr[j], arr[t]];
+
+            if (after < before) {
+              bestSwap = { t, j };
+              d = maxD + 1;
+              break;
+            }
+          }
+        }
+        if (bestSwap) break;
+      }
+
+      if (bestSwap) {
+        const { t, j } = bestSwap;
+        [arr[t], arr[j]] = [arr[j], arr[t]];
+        i = Math.max(2, i - 3);
+      }
+    }
+  }
+
+  breakGlobalRuns(ordered, 3);
+
+  for (let k = 0; k < 10; k++) {
+    const before = triplesCount(ordered);
+    softenTriples(ordered);
+    const after = triplesCount(ordered);
+    if (after >= before) break;
+  }
+
   IMAGES = ordered;
 }
 
@@ -454,34 +565,17 @@ function layout() {
   colW = clamp(colW, minCol, maxCol);
 
   const heights = new Array(cols).fill(0);
-  const lastType = new Array(cols).fill(null);
-  const runCount = new Array(cols).fill(0);
 
-  const SOFT_MAX_RUN = 2;
-  const HARD_MAX_RUN = 3;
-
-  const pickColumn = (t) => {
-    const order = [...Array(cols).keys()].sort((a, b) => heights[a] - heights[b]);
-
-    for (const c of order) {
-      if (lastType[c] !== t) return c;
-      if (runCount[c] < SOFT_MAX_RUN) return c;
-    }
-
-    for (const c of order) {
-      if (lastType[c] !== t) return c;
-      if (runCount[c] < HARD_MAX_RUN) return c;
-    }
-
-    return order[0];
-  };
-
-  for (const it of items) {
+  for (let i = 0; i < items.length; i++) {
+    const it = items[i];
     const aspect = it.aspect && isFinite(it.aspect) && it.aspect > 0 ? it.aspect : 1.3;
     const h = colW / aspect;
 
-    const t = itemType(it);
-    const c = pickColumn(t);
+    // いちばん低い列へ順番どおりに積む
+    let c = 0;
+    for (let j = 1; j < cols; j++) {
+      if (heights[j] < heights[c]) c = j;
+    }
 
     const x = c * (colW + gx);
     const y = heights[c];
@@ -492,12 +586,6 @@ function layout() {
     it.button.style.height = h + "px";
 
     heights[c] = y + h + gy;
-
-    if (lastType[c] === t) runCount[c] += 1;
-    else {
-      lastType[c] = t;
-      runCount[c] = 1;
-    }
   }
 
   masonryEl.style.height = Math.max(...heights, 0) + "px";
@@ -825,29 +913,27 @@ function openLightbox(i) {
 
   const nextSrc = fullUrl(name);
 
+  lightboxEl.classList.add("is-open");
+  lightboxEl.setAttribute("aria-hidden", "false");
+  document.documentElement.style.overflow = "hidden";
+
   disableLightboxMagnifier();
 
-  const img = new Image();
-  img.decoding = "async";
-  img.src = nextSrc;
+  lbImg.style.visibility = "hidden";
+  lbImg.removeAttribute("src");
+  lbImg.src = "";
+  lbImg.alt = "";
 
-  img.onload = () => {
-    lightboxEl.classList.add("is-open");
-    lightboxEl.setAttribute("aria-hidden", "false");
-    document.documentElement.style.overflow = "hidden";
-
-    lbImg.style.visibility = "visible";
+  requestAnimationFrame(() => {
     lbImg.src = nextSrc;
-    lbImg.alt = "";
+  });
 
-    enableLightboxMagnifier();
-    preloadNeighbors(i);
+  preloadNeighbors(i);
 
-    requestAnimationFrame(() => {
-      syncUILens();
-      requestAnimationFrame(syncUILens);
-    });
-  };
+  requestAnimationFrame(() => {
+    syncUILens();
+    requestAnimationFrame(syncUILens);
+  });
 }
 
 /* =========================
