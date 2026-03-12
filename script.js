@@ -192,100 +192,72 @@ function initialMixOnce() {
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   };
+
   shuffle(P);
   shuffle(L);
 
-  const gx = gapX();
-  const gy = gapY();
-  const W = masonryEl.clientWidth;
+  const ordered = [];
 
-  let cols = getColumnsAuto(W);
-
-  const minCol = 92;
-  const maxCol = 260;
-
-  while (cols > 2) {
-    const colWtest = (W - (cols - 1) * gx) / cols;
-    if (colWtest >= minCol) break;
-    cols -= 1;
+  function currentRunType() {
+    if (!ordered.length) return null;
+    return entryType(ordered[ordered.length - 1]);
   }
 
-  let colW = (W - (cols - 1) * gx) / cols;
-  colW = clamp(colW, minCol, maxCol);
+  function currentRunLength() {
+    if (!ordered.length) return 0;
+    const t = entryType(ordered[ordered.length - 1]);
+    let run = 1;
+    for (let i = ordered.length - 2; i >= 0; i--) {
+      if (entryType(ordered[i]) === t) run++;
+      else break;
+    }
+    return run;
+  }
 
-  const lastType = new Array(cols).fill(null);
-  const heights = new Array(cols).fill(0);
-  const runCount = new Array(cols).fill(0);
-
-  const SOFT_MAX_RUN = 2;
-  const HARD_MAX_RUN = 3;
-
-  function takeFrom(type) {
+  function take(type) {
     if (type === "P") return P.length ? P.shift() : null;
     return L.length ? L.shift() : null;
   }
 
-  function tryTake(col, want, hard = false) {
-    const limit = hard ? HARD_MAX_RUN : SOFT_MAX_RUN;
-    if (lastType[col] === want && runCount[col] >= limit) return null;
-
-    const next = takeFrom(want);
-    if (!next) return null;
-
-    if (lastType[col] === want) runCount[col] += 1;
-    else {
-      lastType[col] = want;
-      runCount[col] = 1;
-    }
-
-    return next;
-  }
-
-  function pickForColumn(col, hard = false) {
-    if (lastType[col] == null) {
-      const first = P.length >= L.length ? "P" : "L";
-      return tryTake(col, first, hard) || tryTake(col, first === "P" ? "L" : "P", hard);
-    }
-
-    const opposite = lastType[col] === "P" ? "L" : "P";
-
-    return (
-      tryTake(col, opposite, hard) ||
-      tryTake(col, lastType[col], hard) ||
-      tryTake(col, opposite === "P" ? "L" : "P", hard)
-    );
-  }
-
-  const ordered = [];
-
   while (P.length || L.length) {
-    let best = -1;
+    const lastType = currentRunType();
+    const run = currentRunLength();
 
-    for (let i = 0; i < cols; i++) {
-      const wantOpp = lastType[i] === "P" ? "L" : "P";
-      const oppLeft = wantOpp === "P" ? P.length : L.length;
-      const ok = lastType[i] == null || oppLeft > 0;
+    const pLeft = P.length;
+    const lLeft = L.length;
 
-      if (!ok) continue;
-      if (best === -1 || heights[i] < heights[best]) best = i;
-    }
+    let next = null;
 
-    if (best === -1) {
-      best = 0;
-      for (let i = 1; i < cols; i++) {
-        if (heights[i] < heights[best]) best = i;
+    // まだ何もないなら多い方から
+    if (!lastType) {
+      next = pLeft >= lLeft ? take("P") : take("L");
+    } else {
+      const opposite = lastType === "P" ? "L" : "P";
+
+      // 基本は反対タイプを優先
+      if (opposite === "P" && pLeft > 0) next = take("P");
+      if (opposite === "L" && lLeft > 0) next = take("L");
+
+      // 反対がない時だけ同タイプ
+      if (!next) {
+        if (lastType === "P" && pLeft > 0) next = take("P");
+        if (lastType === "L" && lLeft > 0) next = take("L");
+      }
+
+      // 2連続中なら、極力3連続を避ける
+      if (run >= 2 && next && entryType(next) === lastType) {
+        const altAvailable = opposite === "P" ? pLeft > 0 : lLeft > 0;
+        if (altAvailable) {
+          if (entryType(next) === "P") P.unshift(next);
+          else L.unshift(next);
+
+          next = opposite === "P" ? take("P") : take("L");
+        }
       }
     }
 
-    let entry = pickForColumn(best, false);
-    if (!entry) entry = pickForColumn(best, true);
-    if (!entry) break;
-
-    ordered.push(entry);
-
-    const a = entryAspect(entry);
-    const h = colW / a;
-    heights[best] += h + gy;
+    if (!next) break;
+    ordered.push(next);
   }
 
   function triplesCount(arr) {
@@ -298,22 +270,23 @@ function initialMixOnce() {
     return triples;
   }
 
-  function breakGlobalRuns(arr, maxRun = 3) {
+  function breakGlobalRuns(arr, maxRun = 2) {
     let run = 1;
 
     for (let i = 1; i < arr.length; i++) {
-      const tPrev = entryType(arr[i - 1]);
-      const tCur = entryType(arr[i]);
+      const prev = entryType(arr[i - 1]);
+      const cur = entryType(arr[i]);
 
-      run = tPrev === tCur ? run + 1 : 1;
+      run = prev === cur ? run + 1 : 1;
 
       if (run > maxRun) {
-        const want = tCur === "P" ? "L" : "P";
+        const want = cur === "P" ? "L" : "P";
 
         let j = -1;
-        for (let d = 1; d <= 60; d++) {
+        for (let d = 1; d <= 80; d++) {
           const r = i + d;
           const l = i - d;
+
           if (r < arr.length && entryType(arr[r]) === want) {
             j = r;
             break;
@@ -338,63 +311,42 @@ function initialMixOnce() {
   function softenTriples(arr) {
     const n = arr.length;
 
-    const scoreAround = (k) => {
-      let s = 0;
-      for (let i = Math.max(1, k - 4); i <= Math.min(n - 1, k + 4); i++) {
-        if (entryType(arr[i]) === entryType(arr[i - 1])) s++;
-      }
-      return s;
-    };
-
     for (let i = 2; i < n; i++) {
       const a = entryType(arr[i - 2]);
       const b = entryType(arr[i - 1]);
       const c = entryType(arr[i]);
+
       if (!(a === b && b === c)) continue;
 
       const want = c === "P" ? "L" : "P";
-      const targets = [i, i - 1];
-      const maxD = 40;
+      let swapped = false;
 
-      let bestSwap = null;
+      for (let d = 1; d <= 80; d++) {
+        const r = i + d;
+        const l = i - d;
 
-      for (const t of targets) {
-        if (t < 0 || t >= n) continue;
-
-        for (let d = 1; d <= maxD; d++) {
-          const cand = [t + d, t - d];
-          for (const j of cand) {
-            if (j < 0 || j >= n) continue;
-            if (entryType(arr[j]) !== want) continue;
-
-            const before = scoreAround(t) + scoreAround(j);
-            [arr[t], arr[j]] = [arr[j], arr[t]];
-            const after = scoreAround(t) + scoreAround(j);
-            [arr[t], arr[j]] = [arr[j], arr[t]];
-
-            if (after < before) {
-              bestSwap = { t, j };
-              d = maxD + 1;
-              break;
-            }
-          }
+        if (r < n && entryType(arr[r]) === want) {
+          [arr[i], arr[r]] = [arr[r], arr[i]];
+          swapped = true;
+          break;
         }
-        if (bestSwap) break;
+        if (l >= 0 && entryType(arr[l]) === want) {
+          [arr[i], arr[l]] = [arr[l], arr[i]];
+          swapped = true;
+          break;
+        }
       }
 
-      if (bestSwap) {
-        const { t, j } = bestSwap;
-        [arr[t], arr[j]] = [arr[j], arr[t]];
-        i = Math.max(2, i - 3);
-      }
+      if (swapped) i = Math.max(2, i - 3);
     }
   }
 
-  breakGlobalRuns(ordered, 3);
+  breakGlobalRuns(ordered, 2);
 
-  for (let k = 0; k < 10; k++) {
+  for (let k = 0; k < 12; k++) {
     const before = triplesCount(ordered);
     softenTriples(ordered);
+    breakGlobalRuns(ordered, 2);
     const after = triplesCount(ordered);
     if (after >= before) break;
   }
