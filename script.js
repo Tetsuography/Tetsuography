@@ -795,7 +795,6 @@ function bind() {
   const entry = items[index]?.name;
 
   if (img?.src) activateCursor(img);
-  if (entry) preloadFullOnce(entry);
 });
 
   masonryEl.addEventListener("mouseout", (e) => {
