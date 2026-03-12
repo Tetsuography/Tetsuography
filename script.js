@@ -953,10 +953,6 @@ function setupSmoothScroll() {
 
   lazy();
 
-  for (let i = 0; i < Math.min(6, items.length); i++) {
-  preloadFullOnce(items[i].name);
-} 
-
   setupSmoothScroll();
   animateCursor();
 })();
