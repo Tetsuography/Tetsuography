@@ -841,7 +841,6 @@ function disableLightboxMagnifier() {
 lbImg.addEventListener("load", () => {
   if (!lightboxEl.classList.contains("is-open")) return;
   lbImg.style.visibility = "visible";
-  enableLightboxMagnifier();
 });
 
 function closeLightbox() {
