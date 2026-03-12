@@ -863,10 +863,11 @@ lbNext.onclick = () => openLightbox((activeIndex + 1) % items.length);
 function openLightbox(i) {
   activeIndex = i;
 
-  const name = items[i]?.name;
-  if (!name) return;
+  const item = items[i];
+  if (!item) return;
 
-  const nextSrc = fullUrl(name);
+  const thumbSrc = item.img?.src || thumbUrl(item.name);
+  const nextSrc = fullUrl(item.name);
 
   lightboxEl.classList.add("is-open");
   lightboxEl.setAttribute("aria-hidden", "false");
@@ -874,14 +875,22 @@ function openLightbox(i) {
 
   disableLightboxMagnifier();
 
-  lbImg.style.visibility = "hidden";
-  lbImg.removeAttribute("src");
-  lbImg.src = "";
+  // まずは一覧で使ってる軽い画像を即表示
+  lbImg.style.visibility = "visible";
+  lbImg.src = thumbSrc;
   lbImg.alt = "";
 
-  requestAnimationFrame(() => {
+  // 裏で full を読む
+  const fullImg = new Image();
+  fullImg.decoding = "async";
+  fullImg.src = nextSrc;
+
+  fullImg.onload = () => {
+    // まだ同じ画像を見ている時だけ差し替え
+    if (activeIndex !== i) return;
     lbImg.src = nextSrc;
-  });
+    enableLightboxMagnifier();
+  };
 
   preloadNeighbors(i);
 
