@@ -779,20 +779,24 @@ function bind() {
   );
 
   masonryEl.addEventListener("mouseover", (e) => {
-    const item = e.target.closest(".masonry-item");
-    if (!item) return;
+  const item = e.target.closest(".masonry-item");
+  if (!item) return;
 
-    masonryEl.classList.add("is-hovering");
+  masonryEl.classList.add("is-hovering");
 
-    masonryEl
-      .querySelectorAll(".masonry-item.is-hovered")
-      .forEach((el) => el.classList.remove("is-hovered"));
+  masonryEl
+    .querySelectorAll(".masonry-item.is-hovered")
+    .forEach((el) => el.classList.remove("is-hovered"));
 
-    item.classList.add("is-hovered");
+  item.classList.add("is-hovered");
 
-    const img = items[Number(item.dataset.index)]?.img;
-    if (img?.src) activateCursor(img);
-  });
+  const index = Number(item.dataset.index);
+  const img = items[index]?.img;
+  const entry = items[index]?.name;
+
+  if (img?.src) activateCursor(img);
+  if (entry) preloadFullOnce(entry);
+});
 
   masonryEl.addEventListener("mouseout", (e) => {
     const item = e.target.closest(".masonry-item");
@@ -949,6 +953,10 @@ function setupSmoothScroll() {
   scheduleLayout();
 
   lazy();
+
+  for (let i = 0; i < Math.min(6, items.length); i++) {
+  preloadFullOnce(items[i].name);
+} 
 
   setupSmoothScroll();
   animateCursor();
