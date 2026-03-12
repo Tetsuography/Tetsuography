@@ -560,6 +560,18 @@ function preloadImage(url) {
   img.src = url;
 }
 
+const fullPreloadCache = new Set();
+
+function preloadFullOnce(entry) {
+  const url = fullUrl(entry);
+  if (fullPreloadCache.has(url)) return;
+  fullPreloadCache.add(url);
+
+  const img = new Image();
+  img.decoding = "async";
+  img.src = url;
+}
+
 function preloadNeighbors(index) {
   if (!items.length) return;
 
