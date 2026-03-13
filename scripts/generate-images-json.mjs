@@ -1,23 +1,20 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { imageSize } from "image-size";
-
+import sharp from "sharp";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// プロジェクトのルート
 const ROOT = path.resolve(__dirname, "..");
-
-// 読み取る元フォルダ
 const FULL_DIR = path.join(ROOT, "images", "full");
-
-// 書き出し先
+const THUMB_DIR = path.join(ROOT, "images", "thumb");
 const OUTPUT_JSON = path.join(ROOT, "images.json");
 
-// 対象拡張子
 const VALID_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+
+const THUMB_WIDTH = 900;
+const THUMB_WEBP_QUALITY = 78;
 
 function walk(dir) {
   const results = [];
@@ -30,9 +27,7 @@ function walk(dir) {
       results.push(...walk(fullPath));
     } else {
       const ext = path.extname(entry.name).toLowerCase();
-      if (VALID_EXTENSIONS.has(ext)) {
-        results.push(fullPath);
-      }
+      if (VALID_EXTENSIONS.has(ext)) results.push(fullPath);
     }
   }
 
@@ -43,43 +38,62 @@ function toPosix(p) {
   return p.split(path.sep).join("/");
 }
 
-function buildImageEntry(absPath) {
-  // images/full からの相対パス
-  const relativeFromFull = toPosix(path.relative(FULL_DIR, absPath));
+function ensureDir(dir) {
+  fs.mkdirSync(dir, { recursive: true });
+}
 
-  // chapter = 最初のフォルダ名
-  const parts = relativeFromFull.split("/");
-  const chapter = parts.length > 1 ? parts[0] : "main";
+async function makeThumbAndEntry(absPath) {
+  const relativeFromFull = toPosix(path.relative(FULL_DIR, absPath));
+  const parsed = path.parse(relativeFromFull);
+
+  const chapter = parsed.dir ? parsed.dir.split("/")[0] : "main";
+
+  // thumb は全部 webp に統一
+  const thumbRelative = toPosix(path.join(parsed.dir, `${parsed.name}.webp`));
+  const thumbAbs = path.join(THUMB_DIR, thumbRelative);
+
+  ensureDir(path.dirname(thumbAbs));
+
+  const image = sharp(absPath).rotate();
+  const meta = await image.metadata();
 
   let aspect = 1.3;
-
-  try {
-    const dimensions = imageSize(absPath);
-    if (dimensions.width && dimensions.height) {
-      aspect = Number((dimensions.width / dimensions.height).toFixed(4));
-    }
-  } catch (err) {
-    console.warn("Could not read size:", relativeFromFull);
+  if (meta.width && meta.height) {
+    aspect = Number((meta.width / meta.height).toFixed(4));
   }
+
+  await image
+    .resize({
+      width: THUMB_WIDTH,
+      withoutEnlargement: true
+    })
+    .webp({ quality: THUMB_WEBP_QUALITY })
+    .toFile(thumbAbs);
 
   return {
     file: relativeFromFull,
+    thumb: thumbRelative,
     chapter,
     aspect
   };
 }
 
-function main() {
+async function main() {
   if (!fs.existsSync(FULL_DIR)) {
     console.error("Folder not found:", FULL_DIR);
     process.exit(1);
   }
 
-  const files = walk(FULL_DIR);
+  ensureDir(THUMB_DIR);
 
-  const images = files
-    .map(buildImageEntry)
-    .sort((a, b) => a.file.localeCompare(b.file, "en"));
+  const files = walk(FULL_DIR).sort((a, b) => a.localeCompare(b, "en"));
+
+  const images = [];
+  for (const file of files) {
+    const entry = await makeThumbAndEntry(file);
+    images.push(entry);
+    console.log("processed:", entry.file);
+  }
 
   const output = {
     generatedAt: new Date().toISOString(),
@@ -87,8 +101,10 @@ function main() {
   };
 
   fs.writeFileSync(OUTPUT_JSON, JSON.stringify(output, null, 2) + "\n", "utf8");
-
   console.log(`images.json updated: ${images.length} images`);
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
