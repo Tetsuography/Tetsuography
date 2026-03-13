@@ -133,8 +133,8 @@ function gapY() {
 }
 
 function thumbUrl(entry) {
-  const file = typeof entry === "string" ? entry : entry.file;
-  return THUMBS_DIR + file;
+  if (typeof entry === "string") return THUMBS_DIR + entry;
+  return THUMBS_DIR + (entry.thumb || entry.file);
 }
 
 function fullUrl(entry) {
