@@ -865,7 +865,6 @@ function openLightbox(i) {
   const item = items[i];
   if (!item) return;
 
-  const thumbSrc = item.img?.src || thumbUrl(item.name);
   const nextSrc = fullUrl(item.name);
 
   lightboxEl.classList.add("is-open");
@@ -874,20 +873,20 @@ function openLightbox(i) {
 
   disableLightboxMagnifier();
 
-  // まずは一覧で使ってる軽い画像を即表示
-  lbImg.style.visibility = "visible";
-  lbImg.src = thumbSrc;
+  lbImg.style.visibility = "hidden";
+  lbImg.removeAttribute("src");
+  lbImg.src = "";
   lbImg.alt = "";
 
-  // 裏で full を読む
-  const fullImg = new Image();
-  fullImg.decoding = "async";
-  fullImg.src = nextSrc;
+  const img = new Image();
+  img.decoding = "async";
+  img.src = nextSrc;
 
-  fullImg.onload = () => {
-    // まだ同じ画像を見ている時だけ差し替え
+  img.onload = () => {
     if (activeIndex !== i) return;
+
     lbImg.src = nextSrc;
+    lbImg.style.visibility = "visible";
     enableLightboxMagnifier();
   };
 
