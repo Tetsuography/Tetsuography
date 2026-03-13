@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import sizeOf from "image-size";
+import { imageSize } from "image-size";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,7 +54,7 @@ function buildImageEntry(absPath) {
   let aspect = 1.3;
 
   try {
-    const dimensions = sizeOf(absPath);
+    const dimensions = imageSize(absPath);
     if (dimensions.width && dimensions.height) {
       aspect = Number((dimensions.width / dimensions.height).toFixed(4));
     }
