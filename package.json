@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "generate:images": "node scripts/generate-images-json.mjs"
+  },
+  "dependencies": {
+    "image-size": "^2.0.2"
+  }
+}
