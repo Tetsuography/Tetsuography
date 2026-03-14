@@ -1,305 +1,365 @@
 {
-  "generatedAt": "2026-03-13T14:51:31.132Z",
+  "generatedAt": "2026-03-14T02:16:31.795Z",
   "images": [
     {
       "file": "motion/20260309-R0004546.jpg",
+      "thumb": "motion/20260309-R0004546.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 0.6667
     },
     {
       "file": "motion/DSC05615-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "motion/DSC05615-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/DSC05615-DxO_DeepPRIME XD2s-3.jpg",
+      "thumb": "motion/DSC05615-DxO_DeepPRIME XD2s-3.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/DSC05617-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "motion/DSC05617-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/DSC05617-DxO_DeepPRIME XD2s-3.jpg",
+      "thumb": "motion/DSC05617-DxO_DeepPRIME XD2s-3.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/R0003330-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "motion/R0003330-DxO_DeepPRIME XD2s.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/R0003828-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "motion/R0003828-DxO_DeepPRIME XD2s.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/R0003960-DxO_DeepPRIME XD2s-3.jpg",
+      "thumb": "motion/R0003960-DxO_DeepPRIME XD2s-3.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "motion/R0004000-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "motion/R0004000-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "motion",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/20260304-R0004399.jpg",
+      "thumb": "night/20260304-R0004399.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.5
     },
     {
       "file": "night/20260305-R0004425.jpg",
+      "thumb": "night/20260305-R0004425.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.5
     },
     {
       "file": "night/20260309-R0004564.jpg",
+      "thumb": "night/20260309-R0004564.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.5
     },
     {
       "file": "night/DSC05494-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/DSC05494-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "night/DSC05495-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/DSC05495-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "night/DSC05858-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/DSC05858-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0002312-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/R0002312-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 0.6664
     },
     {
       "file": "night/R0003184-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "night/R0003184-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0003290-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/R0003290-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "night/R0003300-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/R0003300-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0003525-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "night/R0003525-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0003575-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/R0003575-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0003601-DxO_DeepPRIME 3-7.jpg",
+      "thumb": "night/R0003601-DxO_DeepPRIME 3-7.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0003668-DxO_DeepPRIME XD2s-5.jpg",
+      "thumb": "night/R0003668-DxO_DeepPRIME XD2s-5.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "night/R0003696-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/R0003696-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0004065-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "night/R0004065-DxO_DeepPRIME XD2s.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "night/R0004133-DxO_DeepPRIME XD2s-6.jpg",
+      "thumb": "night/R0004133-DxO_DeepPRIME XD2s-6.webp",
       "chapter": "night",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "reflection/DSC05389-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "reflection/DSC05389-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6664
     },
     {
       "file": "reflection/DSC05446-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/DSC05446-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6664
     },
     {
       "file": "reflection/DSC05474-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/DSC05474-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/DSC05531-DxO_DeepPRIME XD2s-4.jpg",
+      "thumb": "reflection/DSC05531-DxO_DeepPRIME XD2s-4.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "reflection/IMG_8493.jpg",
+      "thumb": "reflection/IMG_8493.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6629
     },
     {
       "file": "reflection/R0001601-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "reflection/R0001601-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "reflection/R0001623-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "reflection/R0001623-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "reflection/R0003096-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/R0003096-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0003140-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/R0003140-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0003760-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/R0003760-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0003764-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "reflection/R0003764-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0003765-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/R0003765-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0003945-DxO_DeepPRIME XD2s-2.jpg",
+      "thumb": "reflection/R0003945-DxO_DeepPRIME XD2s-2.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0003999-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "reflection/R0003999-DxO_DeepPRIME XD2s.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "reflection/R0004034-DxO_DeepPRIME XD2s-4.jpg",
+      "thumb": "reflection/R0004034-DxO_DeepPRIME XD2s-4.webp",
       "chapter": "reflection",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/20260304-R0004388-2.jpg",
+      "thumb": "silence/20260304-R0004388-2.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6667
     },
     {
       "file": "silence/20260305-R0004434.jpg",
+      "thumb": "silence/20260305-R0004434.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.5004
     },
     {
       "file": "silence/20260306-R0004455.jpg",
+      "thumb": "silence/20260306-R0004455.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6667
     },
     {
       "file": "silence/DSC05426-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/DSC05426-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "silence/DSC05502-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/DSC05502-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/DSC05833-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/DSC05833-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/DSC05834-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/DSC05834-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/IMG_8478.jpg",
+      "thumb": "silence/IMG_8478.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.5085
     },
     {
       "file": "silence/IMG_8480.jpg",
+      "thumb": "silence/IMG_8480.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.5085
     },
     {
       "file": "silence/IMG_8583.jpg",
+      "thumb": "silence/IMG_8583.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6625
     },
     {
       "file": "silence/IMG_8606.jpg",
+      "thumb": "silence/IMG_8606.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6627
     },
     {
       "file": "silence/R0001990-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/R0001990-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/R0003397-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/R0003397-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/R0003816-DxO_DeepPRIME XD2s-3.jpg",
+      "thumb": "silence/R0003816-DxO_DeepPRIME XD2s-3.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.5006
     },
     {
       "file": "silence/R0004095-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/R0004095-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6668
     },
     {
       "file": "silence/R0004105-DxO_DeepPRIME XD2s-3.jpg",
+      "thumb": "silence/R0004105-DxO_DeepPRIME XD2s-3.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "silence/R0004130-DxO_DeepPRIME XD2s-7.jpg",
+      "thumb": "silence/R0004130-DxO_DeepPRIME XD2s-7.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.4997
     },
     {
       "file": "silence/R0004350-DxO_DeepPRIME XD2s-5.jpg",
+      "thumb": "silence/R0004350-DxO_DeepPRIME XD2s-5.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 1.5
     },
     {
       "file": "silence/R0004352-DxO_DeepPRIME XD2s.jpg",
+      "thumb": "silence/R0004352-DxO_DeepPRIME XD2s.webp",
       "chapter": "silence",
-      "aspect": 1.3
+      "aspect": 0.6667
     }
   ]
 }
