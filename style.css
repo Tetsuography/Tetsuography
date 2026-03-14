@@ -582,11 +582,51 @@ body.cursor-hover .custom-cursor {
     display: none !important;
   }
 
-  .masonry,
+    .masonry,
   .masonry *,
   .lightbox,
   .lightbox * {
     cursor: auto !important;
+  }
+
+  /* モバイルでは hover のブラーをなくす */
+  .masonry.is-hovering .masonry-item:not(.is-hovered){
+    opacity: 1;
+    filter: none;
+  }
+
+  .masonry-item,
+  .masonry-item.is-loaded,
+  .masonry-item.is-visible{
+    transform: none;
+  }
+
+  .masonry-item button{
+    transform: none !important;
+    transition: none;
+  }
+
+  .masonry-item.is-hovered{
+    box-shadow: none;
+  }
+
+  /* モバイルの lightbox は × だけ */
+  .lightbox-prev,
+  .lightbox-next{
+    display: none !important;
+  }
+
+  .lightbox-close{
+    color: #000;
+  }
+
+  .lightbox-stage{
+    padding: 20px;
+  }
+
+  .lightbox-stage img{
+    max-width: 100%;
+    max-height: 84vh;
   }
 }
 
