@@ -615,6 +615,81 @@ function animateCursor() {
 }
 
 /* =========================
+   Mobile touch tap (single tap, no scroll/hold)
+========================= */
+function setupMobileTap() {
+  const TAP_MOVE_LIMIT = 8;   // px — more than this = scroll, not tap
+  const TAP_TIME_LIMIT = 250; // ms — longer than this = hold, not tap
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let touchMoved = false;
+
+  masonryEl.addEventListener("touchstart", (e) => {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+    touchMoved = false;
+  }, { passive: true });
+
+  masonryEl.addEventListener("touchmove", (e) => {
+    const t = e.touches[0];
+    const dx = Math.abs(t.clientX - touchStartX);
+    const dy = Math.abs(t.clientY - touchStartY);
+    if (dx > TAP_MOVE_LIMIT || dy > TAP_MOVE_LIMIT) touchMoved = true;
+  }, { passive: true });
+
+  masonryEl.addEventListener("touchend", (e) => {
+    if (touchMoved) return;
+    if (Date.now() - touchStartTime > TAP_TIME_LIMIT) return;
+
+    const item = e.target.closest(".masonry-item");
+    if (!item) return;
+
+    // Prevent the click event that would fire after touchend
+    e.preventDefault();
+    openLightbox(Number(item.dataset.index));
+  }, { passive: false });
+}
+
+/* =========================
+   Lightbox landscape rotation
+========================= */
+function updateLightboxRotation() {
+  if (!lightboxEl.classList.contains("is-open")) return;
+
+  const item = items[activeIndex];
+  if (!item) return;
+
+  const isLandscape = window.innerWidth > window.innerHeight;
+  const photoIsLandscape = item.aspect >= 1;
+
+  // Rotate landscape photos 90deg when device is in portrait,
+  // or portrait photos 90deg when device is in landscape —
+  // only rotate landscape photos in landscape mode to fill more space
+  if (isLandscape && photoIsLandscape) {
+    // landscape photo on landscape screen: no rotation needed, just maximize
+    lbImg.style.transform = "none";
+    lbImg.style.maxWidth  = "min(96vw, 1400px)";
+    lbImg.style.maxHeight = "88vh";
+  } else if (!isLandscape && photoIsLandscape) {
+    // landscape photo on portrait screen: rotate 90deg to fill width
+    lbImg.style.transform  = "rotate(90deg)";
+    // After rotation width becomes height and vice versa
+    // Use vw as the constraint so it fills the portrait screen width
+    lbImg.style.maxWidth  = "88vh";
+    lbImg.style.maxHeight = "96vw";
+  } else {
+    // portrait photo: never rotate
+    lbImg.style.transform = "none";
+    lbImg.style.maxWidth  = "min(96vw, 1400px)";
+    lbImg.style.maxHeight = "88vh";
+  }
+}
+
+/* =========================
    Events
 ========================= */
 function bind() {
@@ -676,7 +751,10 @@ function bind() {
 
   window.addEventListener("resize", () => {
     scheduleLayout();
-    if (lightboxEl.classList.contains("is-open")) syncUILens();
+    if (lightboxEl.classList.contains("is-open")) {
+      syncUILens();
+      updateLightboxRotation();
+    }
   });
 
   // Keyboard navigation for lightbox
@@ -687,12 +765,64 @@ function bind() {
     if (e.key === "ArrowRight") openLightbox((activeIndex + 1) % items.length);
   });
 
+  // Mobile swipe to navigate lightbox
+  setupLightboxSwipe();
+
+  // Mobile single tap to open lightbox
+  setupMobileTap();
+
   if (mobileMenuToggle && mobileMenu) {
     mobileMenuToggle.addEventListener("click", () => {
       const isOpen = mobileMenu.classList.toggle("is-open");
       mobileMenuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
   }
+}
+
+/* =========================
+   Mobile swipe (lightbox)
+========================= */
+function setupLightboxSwipe() {
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let isSwiping = false;
+
+  const SWIPE_THRESHOLD = 48;
+  const ANGLE_LIMIT = 40;
+  const TIME_LIMIT = 400;
+
+  lightboxEl.addEventListener("touchstart", (e) => {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = Date.now();
+    isSwiping = false;
+  }, { passive: true });
+
+  lightboxEl.addEventListener("touchmove", (e) => {
+    if (e.touches.length === 1) isSwiping = true;
+  }, { passive: true });
+
+  lightboxEl.addEventListener("touchend", (e) => {
+    if (!isSwiping) return;
+    if (!lightboxEl.classList.contains("is-open")) return;
+
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    const dt = Date.now() - touchStartTime;
+
+    if (dt > TIME_LIMIT) return;
+    if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+
+    const angle = Math.abs(Math.atan2(dy, dx) * 180 / Math.PI);
+    const isHorizontal = angle < ANGLE_LIMIT || angle > (180 - ANGLE_LIMIT);
+    if (!isHorizontal) return;
+
+    if (dx < 0) openLightbox((activeIndex + 1) % items.length);
+    else        openLightbox((activeIndex - 1 + items.length) % items.length);
+  }, { passive: true });
 }
 
 /* =========================
@@ -723,6 +853,9 @@ function closeLightbox() {
   disableLightboxMagnifier();
   document.body.classList.remove("cursor-active");
   lbImg.style.visibility = "hidden";
+  lbImg.style.transform = "none";
+  lbImg.style.maxWidth  = "";
+  lbImg.style.maxHeight = "";
   lbImg.removeAttribute("src");
   lbImg.src = "";
 }
@@ -755,6 +888,7 @@ function openLightbox(i) {
     if (activeIndex !== i) return;
     lbImg.src = nextSrc;
     lbImg.style.visibility = "visible";
+    updateLightboxRotation();
     enableLightboxMagnifier();
   };
 
