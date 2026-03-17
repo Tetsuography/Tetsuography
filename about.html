@@ -4,18 +4,52 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — Tetsuography</title>
+  <meta name="description" content="Photography portfolio by Tetsu." />
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="About — Tetsuography">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tetsuography.com/about.html">
+  <meta property="og:image" content="images/001.jpg">
+  <meta property="og:description" content="Photography portfolio by Tetsu.">
 </head>
 <body>
+
   <header class="site-header" role="banner">
     <div class="header-inner">
       <a class="brand" href="index.html" aria-label="Home">Tetsuography</a>
+      <button
+        class="mobile-menu-toggle"
+        id="mobileMenuToggle"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+        type="button"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="nav" aria-label="Primary">
         <a class="nav-link is-active" href="about.html" aria-current="page">about</a>
         <a class="nav-link nav-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
       </nav>
     </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="about.html">about</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
+    </div>
   </header>
+
   <main class="page" role="main">
     <section class="about">
       <div class="about-grid">
@@ -60,5 +94,6 @@
       </div>
     </section>
   </main>
+
 </body>
 </html>
