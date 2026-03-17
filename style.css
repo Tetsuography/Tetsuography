@@ -404,7 +404,6 @@ body.cursor-hover .custom-cursor {
 
 .about-lang-block + .about-lang-block {
   padding-top: 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 .about-lang-block p {
