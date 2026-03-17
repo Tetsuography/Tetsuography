@@ -1,127 +1,80 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tetsuography</title>
+  <meta name="description" content="Photography portfolio by Tetsu." />
+  <meta name="theme-color" content="#ffffff">
 
-<meta charset="utf-8" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
 
-<title>Tetsuography</title>
-
-<meta name="description"
-content="Photography portfolio by Tetsu." />
-
-<meta name="theme-color"
-content="#ffffff">
-
-
-<!-- CSS -->
-<link rel="stylesheet"
-href="style.css" />
-
-
-<!-- Favicon (FULL PRO SETUP) -->
-
-<link rel="icon"
-type="image/png"
-sizes="32x32"
-href="favicon.png">
-
-<link rel="icon"
-type="image/png"
-sizes="16x16"
-href="favicon.png">
-
-<link rel="apple-touch-icon"
-href="favicon.png">
-
-
-<!-- OpenGraph (SNS preview) -->
-
-<meta property="og:title"
-content="Tetsuography">
-
-<meta property="og:type"
-content="website">
-
-<meta property="og:url"
-content="https://tetsuography.com">
-
-<meta property="og:image"
-content="images/001.jpg">
-
-<meta property="og:description"
-content="Photography portfolio by Tetsu.">
-
-<link rel="preconnect" href="https://tetsuography.com">
-<link rel="dns-prefetch" href="https://tetsuography.com">
-
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Tetsuography">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tetsuography.com">
+  <meta property="og:image" content="images/001.jpg">
+  <meta property="og:description" content="Photography portfolio by Tetsu.">
 </head>
-
 <body>
-  <!-- Fixed header (Squarespaceっぽい) -->
+
   <header class="site-header" role="banner">
-  <div class="header-inner">
-    <a class="brand" href="index.html" aria-label="Home">Tetsuography</a>
-
-    <button
-      class="mobile-menu-toggle"
-      id="mobileMenuToggle"
-      aria-label="Menu"
-      aria-expanded="false"
-      aria-controls="mobileMenu"
-      type="button"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav class="nav" aria-label="Primary">
-      <a class="nav-link" href="about.html">about</a>
-      <a class="nav-link nav-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
-        instagram
-      </a>
-    </nav>
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="about.html">about</a>
-    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
-  </div>
-</header>
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Home">Tetsuography</a>
+      <button
+        class="mobile-menu-toggle"
+        id="mobileMenuToggle"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+        type="button"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="about.html">about</a>
+        <a class="nav-link nav-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
+      </nav>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="about.html">about</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
+    </div>
+  </header>
 
   <main class="page" role="main">
-    <!-- Masonry container -->
     <section class="gallery" aria-label="Photo gallery">
-     <div class="container">
-      <div id="masonry" class="masonry" aria-live="polite"></div>
-     </div>
+      <div class="container">
+        <div id="masonry" class="masonry" aria-live="polite"></div>
+      </div>
     </section>
   </main>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
-    
     <button class="lightbox-close" id="lbClose" aria-label="Close (Esc)">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </svg>
-</button>
-
-<button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous (←)">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M15 18L9 12L15 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
-<button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next (→)">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M9 18L15 12L9 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
-
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous (←)">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 18L9 12L15 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next (→)">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18L15 12L9 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
     <div class="lightbox-stage" role="document">
       <img id="lbImg" alt="" />
     </div>
@@ -131,6 +84,6 @@ content="Photography portfolio by Tetsu.">
   <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
 
   <script src="script.js" defer></script>
-  
+
 </body>
 </html>
