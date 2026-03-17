@@ -408,11 +408,31 @@ body.cursor-hover .custom-cursor {
   max-width: 100%;
 }
 
-.about-row {
+/* =====================================================
+   ADD THESE RULES TO style.css
+   (replace or supplement the existing .about-row rules)
+===================================================== */
+
+/* Language blocks: EN block then JP block, stacked vertically */
+.about-lang-block {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 18px;
-  align-items: stretch;
+  gap: 14px;
+}
+
+.about-lang-block + .about-lang-block {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+/* Remove old row styles if no longer needed */
+/* .about-row { ... }  ← can be deleted from style.css */
+
+@media (max-width: 720px) {
+  .about-lang-block + .about-lang-block {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
 }
 
 .about-copy p {
