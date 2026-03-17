@@ -41,12 +41,12 @@
       </button>
       <nav class="nav" aria-label="Primary">
         <a class="nav-link is-active" href="about.html" aria-current="page">about</a>
-        <a class="nav-link nav-instagram" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
+        <a class="nav-link nav-instagram" href="https://www.instagram.com/tetsuography/" target="_blank" rel="noopener noreferrer">instagram</a>
       </nav>
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="about.html">about</a>
-      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">instagram</a>
+      <a href="https://www.instagram.com/tetsuography/" target="_blank" rel="noopener noreferrer">instagram</a>
     </div>
   </header>
 
@@ -94,6 +94,17 @@
       </div>
     </section>
   </main>
+
+  <script>
+    const toggle = document.getElementById("mobileMenuToggle");
+    const menu = document.getElementById("mobileMenu");
+    if (toggle && menu) {
+      toggle.addEventListener("click", () => {
+        const isOpen = menu.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    }
+  </script>
 
 </body>
 </html>
