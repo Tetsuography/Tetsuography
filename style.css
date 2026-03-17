@@ -130,7 +130,7 @@ body {
 }
 
 /* ===============================
-   Masonry Container（消えている）
+   Masonry Container
 ================================ */
 
 .gallery{
@@ -195,12 +195,10 @@ body {
   transform: translateY(0) scale(1);
 }
 
-/* hover中はJSが .is-hovering を付ける */
 .masonry.is-hovering .masonry-item{
   transition-delay: 0ms !important;
 }
 
-/* hover対象以外を少しだけ弱くする = 見た目ほぼ維持しつつ軽量化 */
 .masonry.is-hovering .masonry-item:not(.is-hovered){
   opacity: 0.34;
   filter: blur(3.2px) saturate(0.88) contrast(1.06);
@@ -220,7 +218,6 @@ body {
   transition: transform 720ms cubic-bezier(0.22,1.3,0.36,1);
 }
 
-/* hoverした1枚だけ中心から拡大（他は動かない） */
 .masonry-item.is-hovered button{
   transform: scale(var(--hover-scale));
 }
@@ -232,7 +229,6 @@ body {
     0 6px 14px rgba(0,0,0,0.06);
 }
 
-/* 画像は常に枠にフィット＝比率ズレなし */
 .masonry-item img{
   display:block;
   width:100%;
@@ -240,7 +236,6 @@ body {
   object-fit: cover;
   transform: none;
   transition: none;
-
   image-rendering: -webkit-optimize-contrast;
 }
 
@@ -279,7 +274,7 @@ body.cursor-hover .custom-cursor {
 }
 
 /* ===============================
-   Lightbox (BIGGER + clickable buttons)
+   Lightbox
 ================================ */
 .lightbox{
   position:fixed;
@@ -299,12 +294,10 @@ body.cursor-hover .custom-cursor {
 .lightbox-stage{
   position:absolute;
   inset:0;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
-  padding:40px; /* ←上下左右完全均等 */
+  padding:40px;
 }
 
 .lightbox,
@@ -318,13 +311,11 @@ body.cursor-hover .custom-cursor {
   width:auto;
   height:auto;
   display:block;
-
   transform: none;
   opacity: 1;
   transition: none;
 }
 
-/* ✅ make buttons always clickable */
 .lightbox-close,
 .lightbox-nav{
   position:absolute;
@@ -335,7 +326,6 @@ body.cursor-hover .custom-cursor {
   z-index:2100;
 }
 
-/* close */
 .lightbox-close{
   top:16px;
   right:16px;
@@ -344,10 +334,9 @@ body.cursor-hover .custom-cursor {
   padding:10px 12px;
 }
 
-/* nav */
 .lightbox-nav{
   top:50%;
-  margin-top:-40px;   /* ← 数値は見た目に合わせて微調整 */
+  margin-top:-40px;
   font-size:52px;
   padding:16px 18px;
 }
@@ -404,35 +393,22 @@ body.cursor-hover .custom-cursor {
 
 .about-copy {
   display: grid;
-  gap: 14px;
+  gap: 24px;
   max-width: 100%;
 }
 
-/* =====================================================
-   ADD THESE RULES TO style.css
-   (replace or supplement the existing .about-row rules)
-===================================================== */
-
-/* Language blocks: EN block then JP block, stacked vertically */
 .about-lang-block {
   display: grid;
   gap: 14px;
 }
 
 .about-lang-block + .about-lang-block {
-  margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid rgba(0, 0, 0, 0.10);
 }
 
-/* Remove old row styles if no longer needed */
-/* .about-row { ... }  ← can be deleted from style.css */
-
-@media (max-width: 720px) {
-  .about-lang-block + .about-lang-block {
-    margin-top: 20px;
-    padding-top: 20px;
-  }
+.about-lang-block p {
+  margin: 0;
 }
 
 .about-copy p {
@@ -471,12 +447,7 @@ body.cursor-hover .custom-cursor {
   }
 
   .about-copy {
-    gap: 16px;
-  }
-
-  .about-row {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 18px;
+    gap: 20px;
   }
 }
 
@@ -507,12 +478,15 @@ body.cursor-hover .custom-cursor {
   }
 
   .about-copy {
-    gap: 18px;
+    gap: 20px;
   }
 
-  .about-row {
-    grid-template-columns: 1fr;
-    row-gap: 8px;
+  .about-lang-block {
+    gap: 16px;
+  }
+
+  .about-lang-block + .about-lang-block {
+    padding-top: 20px;
   }
 
   .about-copy p {
@@ -524,7 +498,7 @@ body.cursor-hover .custom-cursor {
     line-height: 1.6;
   }
 
-     :root {
+  :root {
     --gap: 10px;
     --gap-y: 10px;
   }
@@ -602,14 +576,13 @@ body.cursor-hover .custom-cursor {
     display: none !important;
   }
 
-    .masonry,
+  .masonry,
   .masonry *,
   .lightbox,
   .lightbox * {
     cursor: auto !important;
   }
 
-  /* モバイルでは hover のブラーをなくす */
   .masonry.is-hovering .masonry-item:not(.is-hovered){
     opacity: 1;
     filter: none;
@@ -630,7 +603,6 @@ body.cursor-hover .custom-cursor {
     box-shadow: none;
   }
 
-  /* モバイルの lightbox は × だけ */
   .lightbox-prev,
   .lightbox-next{
     display: none !important;
@@ -660,10 +632,10 @@ body.cursor-hover .custom-cursor {
   height: var(--cursor-size-hover);
   border-radius: 999px;
   overflow: hidden;
-  pointer-events: none;      /* ← elementFromPoint を邪魔しない */
-  z-index: 10000;             /* ← cursorより上でもOK */
+  pointer-events: none;
+  z-index: 10000;
   opacity: 0;
-  transform: translate(-50%, -50%);  /* ← left/top を中心基準にする */
+  transform: translate(-50%, -50%);
 }
 
 body.ui-lens-on .ui-lens{
@@ -680,16 +652,13 @@ body.ui-lens-on .ui-lens{
   will-change: transform;
 }
 
-/* レンズ内に複製されたボタン */
 .ui-lens-btn{
-  position: absolute;      /* ← getBoundingClientRect() の座標に合わせる */
-  pointer-events: none; /* ← クリックは本物に任せる */
-
+  position: absolute;
+  pointer-events: none;
   transform: none !important;
   margin: 0 !important;
 }
 
-/* レンズが当たっている本物ボタンだけ消す */
 .ui-hide-real{
   opacity: 0;
 }
