@@ -534,6 +534,9 @@ body.cursor-hover .custom-cursor {
     justify-content: center;
     gap: 4px;
     cursor: pointer;
+    /* sit above the fullscreen menu */
+    position: relative;
+    z-index: 1002;
   }
 
   .mobile-menu-toggle span {
@@ -543,18 +546,19 @@ body.cursor-hover .custom-cursor {
     background: var(--text);
   }
 
+  /* Fullscreen overlay menu */
   .mobile-menu {
-    display: block;
-    position: absolute;
-    top: var(--header-height);
-    left: 0;
-    right: 0;
-    padding: 12px 16px 18px;
-    background: rgba(255,255,255,0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.97);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-6px);
-    transition: opacity 180ms ease, transform 180ms ease;
+    transform: translateY(-8px);
+    transition: opacity 220ms ease, transform 220ms ease;
     z-index: 1001;
   }
 
@@ -569,8 +573,9 @@ body.cursor-hover .custom-cursor {
     text-decoration: none;
     color: var(--text);
     font-family: var(--ui-font);
-    font-size: 13px;
-    line-height: 1.9;
+    font-size: 18px;
+    line-height: 1;
+    padding: 14px 0;
   }
 
   .container {
@@ -630,6 +635,43 @@ body.cursor-hover .custom-cursor {
   .lightbox-stage img {
     max-width: 100%;
     max-height: 84vh;
+  }
+}
+
+/* ===============================
+   Mobile landscape — keep mobile UX,
+   no cursor/arrows even in landscape
+================================ */
+@media (max-width: 920px) and (orientation: landscape) {
+  .custom-cursor,
+  .ui-lens {
+    display: none !important;
+  }
+
+  .masonry,
+  .masonry *,
+  .lightbox,
+  .lightbox * {
+    cursor: auto !important;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    display: none !important;
+  }
+
+  .masonry.is-hovering .masonry-item:not(.is-hovered) {
+    opacity: 1;
+    filter: none;
+  }
+
+  .masonry-item button {
+    transform: none !important;
+    transition: none;
+  }
+
+  .masonry-item.is-hovered {
+    box-shadow: none;
   }
 }
 
