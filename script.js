@@ -617,6 +617,9 @@ function animateCursor() {
 /* =========================
    Mobile touch tap (single tap, no scroll/hold)
 ========================= */
+// Flag to suppress the synthetic click that fires ~300ms after touchend
+let _suppressNextClick = false;
+
 function setupMobileTap() {
   const TAP_MOVE_LIMIT = 8;   // px — more than this = scroll, not tap
   const TAP_TIME_LIMIT = 250; // ms — longer than this = hold, not tap
@@ -648,10 +651,12 @@ function setupMobileTap() {
     const item = e.target.closest(".masonry-item");
     if (!item) return;
 
-    // Prevent the click event that would fire after touchend
-    e.preventDefault();
+    // Set flag to block the synthetic click that fires ~300ms after touchend
+    _suppressNextClick = true;
+    setTimeout(() => { _suppressNextClick = false; }, 600);
+
     openLightbox(Number(item.dataset.index));
-  }, { passive: false });
+  }, { passive: true });
 }
 
 /* =========================
@@ -744,6 +749,8 @@ function bind() {
   });
 
   masonryEl.addEventListener("click", (e) => {
+    // Skip synthetic clicks fired after touch (handled by setupMobileTap)
+    if (_suppressNextClick) return;
     const item = e.target.closest(".masonry-item");
     if (!item) return;
     openLightbox(Number(item.dataset.index));
