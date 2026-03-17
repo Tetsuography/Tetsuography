@@ -430,7 +430,7 @@ body.cursor-hover .custom-cursor {
 /* Chrome renders CJK text slightly taller than Safari */
 @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) {
   .about-copy p.jp {
-    line-height: 1.44;
+    line-height: 1.40;
   }
 }
 
