@@ -82,6 +82,7 @@ async function main() {
   ensureDir(THUMB_DIR);
 
   const files  = walk(SRC_DIR).sort((a, b) => a.localeCompare(b, "en"));
+  console.log("debug - found:", files.length, "SRC_DIR:", SRC_DIR);
   const images = [];
 
   for (const file of files) {
