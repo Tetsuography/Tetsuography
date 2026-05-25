@@ -396,7 +396,14 @@ body.cursor-hover .custom-cursor {
   line-height: 1.1;
   font-weight: 400;
   letter-spacing: 0;
-  margin: 0 0 18px 0;
+  margin: 0 0 6px 0;
+}
+
+.about-tagline {
+  font-size: 12.5px;
+  color: var(--text);
+  margin: 0 0 20px 0;
+  opacity: 0.6;
 }
 
 .about-copy {
@@ -432,6 +439,17 @@ body.cursor-hover .custom-cursor {
   .about-copy p.jp {
     line-height: 1.44;
   }
+}
+
+.about-contact {
+  margin-top: 32px;
+  font-size: 12.5px;
+}
+
+.about-contact a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
 
 /* ===============================
@@ -485,7 +503,7 @@ body.cursor-hover .custom-cursor {
 
   .about-text h1 {
     font-size: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
   }
 
   .about-copy {
@@ -534,7 +552,6 @@ body.cursor-hover .custom-cursor {
     justify-content: center;
     gap: 4px;
     cursor: pointer;
-    /* sit above the fullscreen menu */
     position: relative;
     z-index: 1002;
   }
@@ -546,7 +563,6 @@ body.cursor-hover .custom-cursor {
     background: var(--text);
   }
 
-  /* Fullscreen overlay menu */
   .mobile-menu {
     display: flex;
     flex-direction: column;
