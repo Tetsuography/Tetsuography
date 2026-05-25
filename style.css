@@ -408,17 +408,17 @@ body.cursor-hover .custom-cursor {
 
 .about-copy {
   display: grid;
-  gap: 24px;
+  gap: 14px;
   max-width: 100%;
 }
 
 .about-lang-block {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .about-lang-block + .about-lang-block {
-  padding-top: 24px;
+  padding-top: 14px;
 }
 
 .about-lang-block p,
@@ -431,10 +431,9 @@ body.cursor-hover .custom-cursor {
 }
 
 .about-copy p.jp {
-  line-height: 1.48; /* Safari */
+  line-height: 1.48;
 }
 
-/* Chrome renders CJK text slightly taller than Safari */
 @supports (-webkit-appearance: none) and (not (-moz-appearance: none)) {
   .about-copy p.jp {
     line-height: 1.44;
@@ -442,7 +441,7 @@ body.cursor-hover .custom-cursor {
 }
 
 .about-contact {
-  margin-top: 32px;
+  margin-top: 16px;
   font-size: 12.5px;
 }
 
