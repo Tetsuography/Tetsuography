@@ -73,7 +73,6 @@ async function makeThumbAndEntry(absPath) {
   return {
     file: relativeFromFull,
     thumb: thumbRelative,
-    chapter,
     aspect
   };
 }
