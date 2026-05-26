@@ -134,11 +134,13 @@ function entryType(entry) {
    Load images.json
 ========================= */
 async function loadImages() {
-  // Use inline data if available (loaded via images-data.js script tag)
-  if (window.__imagesData) {
-    const d = window.__imagesData;
-    if (Array.isArray(d.images)) return d.images;
-    if (Array.isArray(d.files)) return d.files.map((f) => ({ file: f, chapter: "main" }));
+  // Prefer inline data embedded in the HTML (no network request needed)
+  const el = document.getElementById("img-data");
+  if (el) {
+    try {
+      const arr = JSON.parse(el.textContent);
+      if (Array.isArray(arr)) return arr;
+    } catch (e) {}
   }
   // Fallback: fetch images.json
   try {
