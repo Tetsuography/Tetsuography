@@ -87,16 +87,17 @@
   <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
 
   <script>
+    var _prev = sessionStorage.getItem('tetsu_stage') || 'none';
     window.__status = document.createElement('div');
     window.__status.style.cssText = 'position:fixed;bottom:10px;left:10px;background:red;color:white;padding:8px 12px;font-size:13px;font-family:sans-serif;z-index:9999;border-radius:4px';
-    window.__status.textContent = 'Stage A: inline before OK';
+    window.__status.textContent = 'A: prev=' + _prev;
     document.body.appendChild(window.__status);
-    console.log('[T] Stage A: inline before OK');
+    sessionStorage.setItem('tetsu_stage', 'A_loaded');
   </script>
-  <script src="script.js?v=5" onerror="window.__status.textContent='FAILED: script.js did not load'; window.__status.style.background='red';" onload="console.log('[T] script.js loaded')"></script>
+  <script src="script.js?v=6" onerror="window.__status.textContent='FAILED: script.js did not load'; window.__status.style.background='darkred';"></script>
   <script>
-    if(window.__status) window.__status.textContent = 'Stage B: after external script';
-    console.log('[T] Stage B: after external script');
+    if(window.__status) window.__status.textContent = 'B: script.js done';
+    sessionStorage.setItem('tetsu_stage', 'B_script_done');
   </script>
 
 </body>

@@ -948,17 +948,27 @@ function setupSmoothScroll() {
    Init
 ========================= */
 (async () => {
-  console.log("[Tetsuography] init start");
+  function s(t) {
+    try { sessionStorage.setItem('tetsu_stage', t); } catch(e) {}
+    if(window.__status) window.__status.textContent = t;
+  }
+
+  s('C: init_start');
   IMAGES = await loadImages();
-  console.log("[Tetsuography] IMAGES count:", IMAGES.length);
+  s('D: loaded_' + IMAGES.length);
   initialMixOnce();
+  s('E: after_mix');
   build();
-  console.log("[Tetsuography] DOM built, items:", items.length);
+  s('F: built_' + items.length);
   bind();
+  s('G: after_bind');
   masonryEl.classList.add("no-move");
   scheduleLayout();
+  s('H: scheduled');
   lazy();
-  console.log("[Tetsuography] lazy observer started");
+  s('I: lazy_done');
   setupSmoothScroll();
+  s('J: smooth_done');
   animateCursor();
+  s('K: COMPLETE');
 })();
