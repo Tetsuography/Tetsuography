@@ -1,10 +1,130 @@
 {
-  "generatedAt": "2026-05-25T08:30:16.601Z",
+  "generatedAt": "2026-05-26T02:15:26.645Z",
   "images": [
+    {
+      "file": "DSC05927-DxO_DeepPRIME XD3.jpg",
+      "thumb": "DSC05927-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.4999
+    },
+    {
+      "file": "DSC06061-DxO_DeepPRIME XD3.jpg",
+      "thumb": "DSC06061-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6667
+    },
+    {
+      "file": "DSC06095-DxO_DeepPRIME XD3.jpg",
+      "thumb": "DSC06095-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6667
+    },
+    {
+      "file": "IMG_9025-2.jpg",
+      "thumb": "IMG_9025-2.webp",
+      "aspect": 1.5088
+    },
+    {
+      "file": "L1002917-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1002917-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1003337-DxO_DeepPRIME XD3-2.jpg",
+      "thumb": "L1003337-DxO_DeepPRIME XD3-2.webp",
+      "aspect": 0.6641
+    },
+    {
+      "file": "L1003381-DxO_DeepPRIME XD3-2.jpg",
+      "thumb": "L1003381-DxO_DeepPRIME XD3-2.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1003519-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1003519-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1003545-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1003545-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1003573-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1003573-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1003907-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1003907-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004046-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004046-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004120-3.jpg",
+      "thumb": "L1004120-3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004282-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004282-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004468-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004468-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004494-DxO_DeepPRIME XD3-2.jpg",
+      "thumb": "L1004494-DxO_DeepPRIME XD3-2.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004507-DxO_DeepPRIME XD3-3.jpg",
+      "thumb": "L1004507-DxO_DeepPRIME XD3-3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004552-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004552-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004688-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004688-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5058
+    },
+    {
+      "file": "L1004799-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004799-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6642
+    },
+    {
+      "file": "L1004905-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004905-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004910-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004910-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1004923-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1004923-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5057
+    },
+    {
+      "file": "L1005013-DxO_DeepPRIME XD3-3.jpg",
+      "thumb": "L1005013-DxO_DeepPRIME XD3-3.webp",
+      "aspect": 1.5057
+    },
     {
       "file": "L1005045-DxO_DeepPRIME XD3.jpg",
       "thumb": "L1005045-DxO_DeepPRIME XD3.webp",
-      "aspect": 1.5054
+      "aspect": 1.5056
     },
     {
       "file": "20260309-R0004546.jpg",
@@ -135,6 +255,86 @@
       "file": "R0004133-DxO_DeepPRIME XD2s-6.jpg",
       "thumb": "R0004133-DxO_DeepPRIME XD2s-6.webp",
       "aspect": 1.5
+    },
+    {
+      "file": "R0000051-DxO_DeepPRIME XD3-2.jpg",
+      "thumb": "R0000051-DxO_DeepPRIME XD3-2.webp",
+      "aspect": 1.5
+    },
+    {
+      "file": "R0000498-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0000498-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6667
+    },
+    {
+      "file": "R0000570-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0000570-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6667
+    },
+    {
+      "file": "R0000612-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0000612-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6666
+    },
+    {
+      "file": "R0000620-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0000620-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6668
+    },
+    {
+      "file": "R0000653-DxO_DeepPRIME XD3-2.jpg",
+      "thumb": "R0000653-DxO_DeepPRIME XD3-2.webp",
+      "aspect": 0.6667
+    },
+    {
+      "file": "R0000670-DxO_DeepPRIME XD3-2.jpg",
+      "thumb": "R0000670-DxO_DeepPRIME XD3-2.webp",
+      "aspect": 0.6668
+    },
+    {
+      "file": "R0000769-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0000769-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6669
+    },
+    {
+      "file": "R0001045-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001045-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5001
+    },
+    {
+      "file": "R0001080-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001080-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6666
+    },
+    {
+      "file": "R0001123-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001123-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5
+    },
+    {
+      "file": "R0001154-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001154-DxO_DeepPRIME XD3.webp",
+      "aspect": 0.6668
+    },
+    {
+      "file": "R0001178-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001178-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5
+    },
+    {
+      "file": "R0001196-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001196-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5001
+    },
+    {
+      "file": "R0001294-DxO_DeepPRIME XD3.jpg",
+      "thumb": "R0001294-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5001
+    },
+    {
+      "file": "R0005048-2.jpg",
+      "thumb": "R0005048-2.webp",
+      "aspect": 1.5001
     },
     {
       "file": "DSC05389-DxO_DeepPRIME XD2s-2.jpg",
