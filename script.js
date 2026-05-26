@@ -461,6 +461,7 @@ function layout() {
   if (!layout._didUnfreeze) {
     layout._didUnfreeze = true;
     requestAnimationFrame(() => masonryEl.classList.remove("no-move"));
+    if (!lazyIO) lazy();
   }
 
   clearTimeout(layout._t);
@@ -965,8 +966,9 @@ function setupSmoothScroll() {
   masonryEl.classList.add("no-move");
   scheduleLayout();
   s('H: scheduled');
-  lazy();
-  s('I: lazy_done');
+  // lazy() is called inside layout() after the first layout pass,
+  // so images have correct positions before IntersectionObserver starts.
+  s('I: after_scheduleLayout');
   setupSmoothScroll();
   s('J: smooth_done');
   animateCursor();
