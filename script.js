@@ -135,7 +135,7 @@ function entryType(entry) {
 ========================= */
 async function loadImages() {
   try {
-    const r = await fetch(IMAGES_JSON_PATH);
+    const r = await fetch(IMAGES_JSON_PATH, { cache: "no-store" });
     const d = await r.json();
     if (Array.isArray(d.images)) return d.images;
     if (Array.isArray(d.files)) return d.files.map((f) => ({ file: f, chapter: "main" }));
@@ -457,7 +457,6 @@ function layout() {
   if (!layout._didUnfreeze) {
     layout._didUnfreeze = true;
     requestAnimationFrame(() => masonryEl.classList.remove("no-move"));
-    if (!lazyIO) lazy();
   }
 
   clearTimeout(layout._t);
@@ -951,6 +950,7 @@ function setupSmoothScroll() {
   bind();
   masonryEl.classList.add("no-move");
   scheduleLayout();
+  lazy();
   setupSmoothScroll();
   animateCursor();
 })();
