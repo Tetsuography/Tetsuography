@@ -134,23 +134,12 @@ function entryType(entry) {
    Load images.json
 ========================= */
 async function loadImages() {
-  // Prefer inline data embedded in the HTML (no network request needed)
-  const el = document.getElementById("img-data");
-  if (el) {
-    try {
-      const arr = JSON.parse(el.textContent);
-      if (Array.isArray(arr)) return arr;
-    } catch (e) {}
-  }
-  // Fallback: fetch images.json
   try {
-    const r = await fetch(IMAGES_JSON_PATH);
+    const r = await fetch(IMAGES_JSON_PATH, { cache: "no-store" });
     const d = await r.json();
     if (Array.isArray(d.images)) return d.images;
     if (Array.isArray(d.files)) return d.files.map((f) => ({ file: f, chapter: "main" }));
-  } catch (e) {
-    console.error("[Tetsuography] loadImages failed:", e);
-  }
+  } catch (e) {}
   return [];
 }
 
@@ -402,7 +391,7 @@ function lazy() {
         startLoad(img);
       }
     },
-    { rootMargin: "400px" }
+    { rootMargin: "1000px" }
   );
   items.forEach((it) => lazyIO.observe(it.img));
 }
@@ -468,7 +457,6 @@ function layout() {
   if (!layout._didUnfreeze) {
     layout._didUnfreeze = true;
     requestAnimationFrame(() => masonryEl.classList.remove("no-move"));
-    if (!lazyIO) lazy();
   }
 
   clearTimeout(layout._t);
@@ -956,28 +944,13 @@ function setupSmoothScroll() {
    Init
 ========================= */
 (async () => {
-  function s(t) {
-    try { sessionStorage.setItem('tetsu_stage', t); } catch(e) {}
-    if(window.__status) window.__status.textContent = t;
-  }
-
-  s('C: init_start');
   IMAGES = await loadImages();
-  s('D: loaded_' + IMAGES.length);
   initialMixOnce();
-  s('E: after_mix');
   build();
-  s('F: built_' + items.length);
   bind();
-  s('G: after_bind');
   masonryEl.classList.add("no-move");
   scheduleLayout();
-  s('H: scheduled');
-  // lazy() is called inside layout() after the first layout pass,
-  // so images have correct positions before IntersectionObserver starts.
-  s('I: after_scheduleLayout');
+  lazy();
   setupSmoothScroll();
-  s('J: smooth_done');
   animateCursor();
-  s('K: COMPLETE');
 })();
