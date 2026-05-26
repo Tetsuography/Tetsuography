@@ -134,11 +134,16 @@ function entryType(entry) {
    Load images.json
 ========================= */
 async function loadImages() {
+  // Use inline data if available (loaded via images-data.js script tag)
+  if (window.__imagesData) {
+    const d = window.__imagesData;
+    if (Array.isArray(d.images)) return d.images;
+    if (Array.isArray(d.files)) return d.files.map((f) => ({ file: f, chapter: "main" }));
+  }
+  // Fallback: fetch images.json
   try {
     const r = await fetch(IMAGES_JSON_PATH);
-    console.log("[Tetsuography] fetch status:", r.status, r.url);
     const d = await r.json();
-    console.log("[Tetsuography] images loaded:", Array.isArray(d.images) ? d.images.length : "no images array");
     if (Array.isArray(d.images)) return d.images;
     if (Array.isArray(d.files)) return d.files.map((f) => ({ file: f, chapter: "main" }));
   } catch (e) {

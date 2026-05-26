@@ -94,7 +94,8 @@
     document.body.appendChild(window.__status);
     sessionStorage.setItem('tetsu_stage', 'A_loaded');
   </script>
-  <script src="script.js?v=6" onerror="window.__status.textContent='FAILED: script.js did not load'; window.__status.style.background='darkred';"></script>
+  <script src="images-data.js?v=1"></script>
+  <script src="script.js?v=7" onerror="window.__status.textContent='FAILED: script.js did not load'; window.__status.style.background='darkred';"></script>
   <script>
     if(window.__status) window.__status.textContent = 'B: script.js done';
     sessionStorage.setItem('tetsu_stage', 'B_script_done');
