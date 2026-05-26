@@ -135,7 +135,7 @@ function entryType(entry) {
 ========================= */
 async function loadImages() {
   try {
-    const r = await fetch(IMAGES_JSON_PATH, { cache: "no-store" });
+    const r = await fetch(IMAGES_JSON_PATH);
     console.log("[Tetsuography] fetch status:", r.status, r.url);
     const d = await r.json();
     console.log("[Tetsuography] images loaded:", Array.isArray(d.images) ? d.images.length : "no images array");
@@ -395,7 +395,7 @@ function lazy() {
         startLoad(img);
       }
     },
-    { rootMargin: "1000px" }
+    { rootMargin: "400px" }
   );
   items.forEach((it) => lazyIO.observe(it.img));
 }
