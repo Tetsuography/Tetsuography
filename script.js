@@ -136,10 +136,14 @@ function entryType(entry) {
 async function loadImages() {
   try {
     const r = await fetch(IMAGES_JSON_PATH, { cache: "no-store" });
+    console.log("[Tetsuography] fetch status:", r.status, r.url);
     const d = await r.json();
+    console.log("[Tetsuography] images loaded:", Array.isArray(d.images) ? d.images.length : "no images array");
     if (Array.isArray(d.images)) return d.images;
     if (Array.isArray(d.files)) return d.files.map((f) => ({ file: f, chapter: "main" }));
-  } catch (e) {}
+  } catch (e) {
+    console.error("[Tetsuography] loadImages failed:", e);
+  }
   return [];
 }
 
@@ -944,13 +948,17 @@ function setupSmoothScroll() {
    Init
 ========================= */
 (async () => {
+  console.log("[Tetsuography] init start");
   IMAGES = await loadImages();
+  console.log("[Tetsuography] IMAGES count:", IMAGES.length);
   initialMixOnce();
   build();
+  console.log("[Tetsuography] DOM built, items:", items.length);
   bind();
   masonryEl.classList.add("no-move");
   scheduleLayout();
   lazy();
+  console.log("[Tetsuography] lazy observer started");
   setupSmoothScroll();
   animateCursor();
 })();
