@@ -1,6 +1,11 @@
 {
-  "generatedAt": "2026-05-25T08:10:44.411Z",
+  "generatedAt": "2026-05-25T08:30:16.601Z",
   "images": [
+    {
+      "file": "L1005045-DxO_DeepPRIME XD3.jpg",
+      "thumb": "L1005045-DxO_DeepPRIME XD3.webp",
+      "aspect": 1.5054
+    },
     {
       "file": "20260309-R0004546.jpg",
       "thumb": "20260309-R0004546.webp",
@@ -9,42 +14,42 @@
     {
       "file": "DSC05615-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "DSC05615-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "DSC05615-DxO_DeepPRIME XD2s-3.jpg",
       "thumb": "DSC05615-DxO_DeepPRIME XD2s-3.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "DSC05617-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "DSC05617-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "DSC05617-DxO_DeepPRIME XD2s-3.jpg",
       "thumb": "DSC05617-DxO_DeepPRIME XD2s-3.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003330-DxO_DeepPRIME XD2s.jpg",
       "thumb": "R0003330-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003828-DxO_DeepPRIME XD2s.jpg",
       "thumb": "R0003828-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003960-DxO_DeepPRIME XD2s-3.jpg",
       "thumb": "R0003960-DxO_DeepPRIME XD2s-3.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0004000-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "R0004000-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "20260304-R0004399.jpg",
@@ -74,7 +79,7 @@
     {
       "file": "DSC05858-DxO_DeepPRIME XD2s.jpg",
       "thumb": "DSC05858-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0002312-DxO_DeepPRIME XD2s.jpg",
@@ -84,7 +89,7 @@
     {
       "file": "R0003184-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "R0003184-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003290-DxO_DeepPRIME XD2s.jpg",
@@ -94,22 +99,22 @@
     {
       "file": "R0003300-DxO_DeepPRIME XD2s.jpg",
       "thumb": "R0003300-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003525-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "R0003525-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003575-DxO_DeepPRIME XD2s.jpg",
       "thumb": "R0003575-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003601-DxO_DeepPRIME 3-7.jpg",
       "thumb": "R0003601-DxO_DeepPRIME 3-7.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003668-DxO_DeepPRIME XD2s-5.jpg",
@@ -119,17 +124,17 @@
     {
       "file": "R0003696-DxO_DeepPRIME XD2s.jpg",
       "thumb": "R0003696-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0004065-DxO_DeepPRIME XD2s.jpg",
       "thumb": "R0004065-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0004133-DxO_DeepPRIME XD2s-6.jpg",
       "thumb": "R0004133-DxO_DeepPRIME XD2s-6.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "DSC05389-DxO_DeepPRIME XD2s-2.jpg",
@@ -149,7 +154,7 @@
     {
       "file": "DSC05531-DxO_DeepPRIME XD2s-4.jpg",
       "thumb": "DSC05531-DxO_DeepPRIME XD2s-4.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "IMG_8493.jpg",
@@ -159,12 +164,12 @@
     {
       "file": "R0001601-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "R0001601-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0001623-DxO_DeepPRIME XD2s-2.jpg",
       "thumb": "R0001623-DxO_DeepPRIME XD2s-2.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0003096-DxO_DeepPRIME XD2s.jpg",
@@ -214,7 +219,7 @@
     {
       "file": "20260305-R0004434.jpg",
       "thumb": "20260305-R0004434.webp",
-      "aspect": 1.5004
+      "aspect": 1.5
     },
     {
       "file": "20260306-R0004455.jpg",
@@ -224,7 +229,7 @@
     {
       "file": "DSC05426-DxO_DeepPRIME XD2s.jpg",
       "thumb": "DSC05426-DxO_DeepPRIME XD2s.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "DSC05502-DxO_DeepPRIME XD2s.jpg",
@@ -254,12 +259,12 @@
     {
       "file": "IMG_8583.jpg",
       "thumb": "IMG_8583.webp",
-      "aspect": 0.6625
+      "aspect": 0.6624
     },
     {
       "file": "IMG_8606.jpg",
       "thumb": "IMG_8606.webp",
-      "aspect": 0.6627
+      "aspect": 0.6626
     },
     {
       "file": "R0001990-DxO_DeepPRIME XD2s.jpg",
@@ -274,7 +279,7 @@
     {
       "file": "R0003816-DxO_DeepPRIME XD2s-3.jpg",
       "thumb": "R0003816-DxO_DeepPRIME XD2s-3.webp",
-      "aspect": 1.5006
+      "aspect": 1.5009
     },
     {
       "file": "R0004095-DxO_DeepPRIME XD2s.jpg",
@@ -284,12 +289,12 @@
     {
       "file": "R0004105-DxO_DeepPRIME XD2s-3.jpg",
       "thumb": "R0004105-DxO_DeepPRIME XD2s-3.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0004130-DxO_DeepPRIME XD2s-7.jpg",
       "thumb": "R0004130-DxO_DeepPRIME XD2s-7.webp",
-      "aspect": 1.4997
+      "aspect": 1.5
     },
     {
       "file": "R0004350-DxO_DeepPRIME XD2s-5.jpg",
