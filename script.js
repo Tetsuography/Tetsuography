@@ -47,6 +47,7 @@ let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
 let activeHoverImg = null;
 let activeIndex    = -1;
 let suppressClick  = false;
+let lastRafTime    = 0;
 
 /* ─── Helpers ─────────────────────────────────── */
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
@@ -339,9 +340,14 @@ function setUIHide(el) {
   [lbClose, lbPrev, lbNext].forEach(b => b.classList.toggle("ui-hide-real", b === el));
 }
 
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * LERP;
-  cursorY += (mouseY - cursorY) * LERP;
+function animateCursor(now = 0) {
+  // Frame-rate independent lerp: same feel at 60Hz and 120Hz
+  const dt     = Math.min((now - lastRafTime) / 1000, 0.05); // seconds, capped at 50ms
+  lastRafTime  = now;
+  const factor = dt > 0 ? 1 - Math.pow(1 - LERP, dt * 60) : LERP;
+
+  cursorX += (mouseX - cursorX) * factor;
+  cursorY += (mouseY - cursorY) * factor;
   cursorEl.style.left = cursorX + "px";
   cursorEl.style.top  = cursorY + "px";
 
