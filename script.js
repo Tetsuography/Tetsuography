@@ -252,16 +252,6 @@ function layout() {
 
 /* ─── Lightbox ────────────────────────────────── */
 
-// Position counter at the bottom-right corner of the photo
-function positionCounter() {
-  if (!lbCounter || !lightboxEl.classList.contains("is-open")) return;
-  requestAnimationFrame(() => {
-    const r = lbImg.getBoundingClientRect();
-    if (r.width === 0) return;
-    lbCounter.style.left = (r.right - lbCounter.offsetWidth) + "px";
-    lbCounter.style.top  = (r.bottom + 10) + "px";
-  });
-}
 
 function openLightbox(i) {
   activeIndex = i;
@@ -294,7 +284,6 @@ function openLightbox(i) {
     lbImg.style.visibility = "visible";
     enableLbMag();
     updateLbRotation();
-    positionCounter();
   };
   tmp.src = src;
 
@@ -542,7 +531,7 @@ function bind() {
   /* Resize */
   window.addEventListener("resize", () => {
     scheduleLayout();
-    if (lightboxEl.classList.contains("is-open")) { syncUI(); updateLbRotation(); positionCounter(); }
+    if (lightboxEl.classList.contains("is-open")) { syncUI(); updateLbRotation(); }
   });
 
   /* Back button closes lightbox */
