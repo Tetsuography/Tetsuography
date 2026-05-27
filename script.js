@@ -251,6 +251,18 @@ function layout() {
 }
 
 /* ─── Lightbox ────────────────────────────────── */
+
+// Position counter at the bottom-right corner of the photo
+function positionCounter() {
+  if (!lbCounter || !lightboxEl.classList.contains("is-open")) return;
+  requestAnimationFrame(() => {
+    const r = lbImg.getBoundingClientRect();
+    if (r.width === 0) return;
+    lbCounter.style.left = (r.right  - lbCounter.offsetWidth  - 10) + "px";
+    lbCounter.style.top  = (r.bottom - lbCounter.offsetHeight - 10) + "px";
+  });
+}
+
 function openLightbox(i) {
   activeIndex = i;
   const it = items[i];
@@ -259,13 +271,13 @@ function openLightbox(i) {
   // Counter: "3 / 101"
   if (lbCounter) lbCounter.textContent = `${i + 1} / ${items.length}`;
 
-  // URL hash: use file stem (stable across sort randomness, sharable link)
-  const stem    = it.entry.file.replace(/\.[^.]+$/, "");
+  // URL hash: zero-padded stable ID (#042) — assigned before sort, never reveals filename
+  const id      = String(it.entry._id).padStart(3, "0");
   const wasOpen = lightboxEl.classList.contains("is-open");
   if (wasOpen) {
-    history.replaceState(null, "", "#" + stem);
+    history.replaceState(null, "", "#" + id);
   } else {
-    history.pushState(null, "", "#" + stem);
+    history.pushState(null, "", "#" + id);
   }
 
   lbImg.style.visibility = "hidden";
@@ -282,6 +294,7 @@ function openLightbox(i) {
     lbImg.style.visibility = "visible";
     enableLbMag();
     updateLbRotation();
+    positionCounter();
   };
   tmp.src = src;
 
@@ -529,7 +542,7 @@ function bind() {
   /* Resize */
   window.addEventListener("resize", () => {
     scheduleLayout();
-    if (lightboxEl.classList.contains("is-open")) { syncUI(); updateLbRotation(); }
+    if (lightboxEl.classList.contains("is-open")) { syncUI(); updateLbRotation(); positionCounter(); }
   });
 
   /* Back button closes lightbox */
@@ -568,6 +581,7 @@ function setupSmoothScroll() {
 /* ─── Init ────────────────────────────────────── */
 (async () => {
   IMAGES = await loadImages();
+  IMAGES.forEach((img, i) => { img._id = i; }); // stable ID before sort
   IMAGES = softChronologicalSort(IMAGES);
   build();
   bind();
@@ -576,13 +590,11 @@ function setupSmoothScroll() {
   setupSmoothScroll();
   animateCursor();
 
-  // Auto-open photo from URL hash (e.g. shared link like #DSC01234)
-  const hash = decodeURIComponent(location.hash.slice(1));
+  // Auto-open photo from URL hash (e.g. shared link like #042)
+  const hash = location.hash.slice(1);
   if (hash) {
-    const idx = items.findIndex(it =>
-      it.entry.file.replace(/\.[^.]+$/, "") === hash ||
-      it.entry.file === hash
-    );
+    const id  = parseInt(hash, 10);
+    const idx = isNaN(id) ? -1 : items.findIndex(it => it.entry._id === id);
     if (idx >= 0) setTimeout(() => openLightbox(idx), 350);
   }
 })();
