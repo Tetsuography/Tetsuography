@@ -84,12 +84,29 @@ async function loadImages() {
   }
 }
 
-/* ─── Shuffle ─────────────────────────────────── */
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = (Math.random() * (i + 1)) | 0;
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
+/* ─── Soft chronological sort ─────────────────── */
+// Recent photos tend toward the top, older toward the bottom,
+// but with random jitter so it's never perfectly sequential.
+// NOISE = 0.25 means ±25% of total count as position jitter.
+const NOISE = 0.25;
+
+function softChronologicalSort(arr) {
+  const n      = arr.length;
+  const jitter = n * NOISE;
+
+  return arr
+    .slice()
+    // Sort by date descending (newest first); no-date entries go to end
+    .sort((a, b) => {
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return  1;
+      if (!b.date) return -1;
+      return b.date < a.date ? -1 : b.date > a.date ? 1 : 0;
+    })
+    // Add random noise to each item's rank, then re-sort
+    .map((img, rank) => ({ img, score: rank + (Math.random() - 0.5) * 2 * jitter }))
+    .sort((a, b) => a.score - b.score)
+    .map(x => x.img);
 }
 
 /* ─── Build DOM ───────────────────────────────── */
@@ -532,7 +549,7 @@ function setupSmoothScroll() {
 /* ─── Init ────────────────────────────────────── */
 (async () => {
   IMAGES = await loadImages();
-  shuffle(IMAGES);
+  IMAGES = softChronologicalSort(IMAGES);
   build();
   bind();
   masonryEl.classList.add("no-move");
