@@ -85,5 +85,29 @@
 
   <script src="script.js" defer></script>
 
+  <!-- DEBUG: remove after fixing -->
+  <script>
+    var __d = document.createElement('div');
+    __d.id = '__dbg';
+    __d.style.cssText = 'position:fixed;bottom:10px;left:10px;right:10px;background:rgba(255,0,0,0.85);color:#fff;font:12px monospace;padding:8px;z-index:99999;border-radius:4px;pointer-events:none;white-space:pre-wrap;display:none';
+    document.body.appendChild(__d);
+
+    window.addEventListener('error', function(e) {
+      __d.style.display = 'block';
+      __d.textContent += 'JS ERROR: ' + e.message + ' (line ' + e.lineno + ')\n';
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      __d.style.display = 'block';
+      __d.textContent += 'PROMISE ERROR: ' + e.reason + '\n';
+    });
+
+    setTimeout(function() {
+      var masonry = document.getElementById('masonry');
+      var items = masonry ? masonry.children.length : -1;
+      __d.style.display = 'block';
+      __d.textContent = 'items in masonry: ' + items + '\nIMAGES: ' + (typeof IMAGES !== 'undefined' ? IMAGES.length : 'undefined');
+    }, 3000);
+  </script>
+
 </body>
 </html>
