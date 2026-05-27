@@ -720,6 +720,7 @@ body.ui-lens-on .ui-lens {
   height: 100vh;
   transform-origin: 0 0;
   will-change: transform;
+  pointer-events: none;
 }
 
 .ui-lens-btn {
