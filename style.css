@@ -584,6 +584,8 @@ body.cursor-hover .custom-cursor {
     transform: translateY(0);
   }
 
+  /* pointer-events is NOT inherited in HTML — explicitly block closed-menu
+     links so they don't intercept touches when the menu is invisible */
   .mobile-menu a {
     display: block;
     text-decoration: none;
@@ -592,6 +594,11 @@ body.cursor-hover .custom-cursor {
     font-size: 18px;
     line-height: 1;
     padding: 14px 0;
+    pointer-events: none;
+  }
+
+  .mobile-menu.is-open a {
+    pointer-events: auto;
   }
 
   .container {

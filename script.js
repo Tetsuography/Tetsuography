@@ -315,12 +315,14 @@ function build() {
     img.dataset.src = thumbUrl(entry);
     img.decoding = "async";
 
+    // Don't use native loading="lazy" — we manage lazy loading ourselves via
+    // IntersectionObserver. Native lazy loading defers the fetch even after
+    // we set img.src programmatically, which breaks our IO-driven approach.
+    img.loading = "eager";
     const FIRST_EAGER = 6;
     if (i < FIRST_EAGER) {
-      img.loading = "eager";
       img.fetchPriority = "high";
     } else {
-      img.loading = "lazy";
       img.fetchPriority = "auto";
     }
 
@@ -353,12 +355,13 @@ function revealItem(it) {
 function startLoad(img) {
   if (img.dataset.started === "1") return;
   img.dataset.started = "1";
+  img.loading = "eager"; // ensure browser fetches immediately
 
   const idx = Number(img.closest(".masonry-item").dataset.index);
   const it = items[idx];
   let finished = false;
 
-  const done = async () => {
+  const done = () => {
     if (finished) return;
     finished = true;
     if (img.naturalWidth > 0 && img.naturalHeight > 0) {
@@ -366,7 +369,6 @@ function startLoad(img) {
     }
     it.loaded = true;
     scheduleLayout();
-    try { if (img.decode) await img.decode(); } catch (e) {}
     revealItem(it);
   };
 
