@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "tetsuography",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8787"],
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/tetsuo/Desktop/GitHub/Tetsuography && python3 -m http.server 8787"],
       "port": 8787
     }
   ]
