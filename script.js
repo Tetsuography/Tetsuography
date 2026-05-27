@@ -258,8 +258,8 @@ function positionCounter() {
   requestAnimationFrame(() => {
     const r = lbImg.getBoundingClientRect();
     if (r.width === 0) return;
-    lbCounter.style.left = (r.right  - lbCounter.offsetWidth  - 10) + "px";
-    lbCounter.style.top  = (r.bottom - lbCounter.offsetHeight - 10) + "px";
+    lbCounter.style.left = (r.right - lbCounter.offsetWidth) + "px";
+    lbCounter.style.top  = (r.bottom + 10) + "px";
   });
 }
 
