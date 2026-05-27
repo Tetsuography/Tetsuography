@@ -7,7 +7,7 @@ const IMAGES_JSON = "./images.json";
 const THUMBS_DIR  = "images/thumb/";
 const FULL_DIR    = "images/full/";
 const ZOOM        = 3;
-const LERP        = 0.16;
+const LERP        = 0.25;
 const SMOOTH      = true;
 
 /* ─── DOM ─────────────────────────────────────── */
