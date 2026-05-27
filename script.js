@@ -20,6 +20,7 @@ const lbImg            = document.getElementById("lbImg");
 const lbClose          = document.getElementById("lbClose");
 const lbPrev           = document.getElementById("lbPrev");
 const lbNext           = document.getElementById("lbNext");
+const lbCounter        = document.getElementById("lbCounter");
 
 /* Probe div: CSS var() → px */
 const __probe = document.createElement("div");
@@ -255,6 +256,18 @@ function openLightbox(i) {
   const it = items[i];
   if (!it) return;
 
+  // Counter: "3 / 101"
+  if (lbCounter) lbCounter.textContent = `${i + 1} / ${items.length}`;
+
+  // URL hash: use file stem (stable across sort randomness, sharable link)
+  const stem    = it.entry.file.replace(/\.[^.]+$/, "");
+  const wasOpen = lightboxEl.classList.contains("is-open");
+  if (wasOpen) {
+    history.replaceState(null, "", "#" + stem);
+  } else {
+    history.pushState(null, "", "#" + stem);
+  }
+
   lbImg.style.visibility = "hidden";
   lbImg.removeAttribute("src");
   lightboxEl.classList.add("is-open");
@@ -293,6 +306,7 @@ function closeLightbox() {
   lbImg.removeAttribute("src");
   activeHoverImg = null;
   cursorEl.style.backgroundImage = "none";
+  history.replaceState(null, "", location.pathname + location.search);
 }
 
 function updateLbRotation() {
@@ -518,6 +532,11 @@ function bind() {
     if (lightboxEl.classList.contains("is-open")) { syncUI(); updateLbRotation(); }
   });
 
+  /* Back button closes lightbox */
+  window.addEventListener("popstate", () => {
+    if (lightboxEl.classList.contains("is-open")) closeLightbox();
+  });
+
   /* Mobile hamburger menu */
   if (mobileMenuToggle && mobileMenu) {
     mobileMenuToggle.addEventListener("click", () => {
@@ -556,4 +575,14 @@ function setupSmoothScroll() {
   scheduleLayout();   // layout() → on first run → loadAllImages()
   setupSmoothScroll();
   animateCursor();
+
+  // Auto-open photo from URL hash (e.g. shared link like #DSC01234)
+  const hash = decodeURIComponent(location.hash.slice(1));
+  if (hash) {
+    const idx = items.findIndex(it =>
+      it.entry.file.replace(/\.[^.]+$/, "") === hash ||
+      it.entry.file === hash
+    );
+    if (idx >= 0) setTimeout(() => openLightbox(idx), 350);
+  }
 })();

@@ -740,3 +740,20 @@ body.ui-lens-on .ui-lens {
 .ui-hide-real {
   opacity: 0;
 }
+
+/* ===============================
+   Lightbox counter ("3 / 101")
+================================ */
+.lightbox-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
