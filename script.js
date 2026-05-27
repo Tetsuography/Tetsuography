@@ -134,6 +134,9 @@ function entryType(entry) {
    Load images.json
 ========================= */
 async function loadImages() {
+  // Use inline data if available (fastest, no network)
+  if (Array.isArray(window.__IMG)) return window.__IMG;
+  // Fallback: fetch
   try {
     const r = await fetch(IMAGES_JSON_PATH);
     const d = await r.json();
